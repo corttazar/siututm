@@ -19,8 +19,8 @@ public class conectar {
     public boolean conectar() {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            String BD = "jdbc:oracle:thin:@localhost:1521/XE";
-            conexion = DriverManager.getConnection(BD, "cargahorariadb", "root");
+            String BD = "jdbc:oracle:thin:@localhost:1521:XE";
+            conexion = DriverManager.getConnection(BD, "controlhorario", "root");
             if (conexion != null) {
                 System.out.println("Conexion exitosa a esquema XE");
                 return true;
@@ -215,7 +215,8 @@ public class conectar {
             return rs;
         
     }catch(Exception e) {
-            System.out.println("Error al consultar" + e);
+            //System.out.println("Error al consultar" + e);
+            System.out.println("Usuario y/o Contraseña no válidos");
     }
         return rs;
     }

@@ -44,7 +44,7 @@
         <% }else{
                 usu = (String)sesionX.getAttribute("usuario");
                 tipo = (String)sesionX.getAttribute("perfil");
-                 out.print("<center> Bienvenido:<font color='#F0C'>"+usu+"</font > Perfil:<font color ='#F0C'>"+tipo+"</font><a href='salir.jsp'>|---Salir---|</a ></center>");
+                out.print("<center> Bienvenido:<font color='#F0C'>"+usu+"</font > Perfil:<font color ='#F0C'>"+tipo+"</font><a href='salir.jsp'>|---Salir---|</a ></center>");
             //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
