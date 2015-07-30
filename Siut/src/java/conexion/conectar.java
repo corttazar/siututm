@@ -20,7 +20,7 @@ public class conectar {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
             String BD = "jdbc:oracle:thin:@localhost:1521:XE";
-            conexion = DriverManager.getConnection(BD, "controlhorario", "root");
+            conexion = DriverManager.getConnection(BD, "cargahorariadb", "root");
             if (conexion != null) {
                 System.out.println("Conexion exitosa a esquema XE");
                 return true;
@@ -203,10 +203,11 @@ public class conectar {
      public ResultSet usr(String A, String B) {
         ResultSet rs = null;
         try {
-            String sql = "select usuario, contraseña, tipos.perfil from login \n"
-                    + "inner join personas on login.idpersona = personas.idpersona \n"
-                    + "inner join tipos on personas.idtipo=tipos.idtipo where usuario= '" + A + "' and contraseña= '" + B + "'";
+            String sql = "select l.usuario, l.contraseña, t.tipo, p.idpersona from login l \n"
+                    + "inner join personas p on l.idpersona = p.idpersona  \n"
+                    + "inner join tipos t on p.idtipo=t.idtipo where l.usuario= '" + A + "' and l.contraseña= '" + B + "'";
 
+            System.out.println("query de usu: "+sql);
             if (conectar()) {
                 Statement stt = conexion.createStatement();
                 rs = stt.executeQuery(sql);

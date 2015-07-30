@@ -25,13 +25,14 @@
                 out.print("Datos incorrectos!!");
             } else {
                 String perfil = mrc.getString(3);
-              out.print	("Bienvenido " +perfil);
+                String usu = mrc.getString(1);
+              out.print	("Bienvenido " +usu);
 
-                if (perfil.equals("profesor tiempo completo")) {
+                if (perfil.equals("Profesor de Asignatura")) {
                     HttpSession sesionX = request.getSession();
                     sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
-                    sesionX.setAttribute("id", mrc.getString(1));
+                    sesionX.setAttribute("id", mrc.getString(4));
                     response.sendRedirect("admin.jsp");
                     
                     
@@ -50,7 +51,7 @@
                 }
             }
         } catch (Exception e) {
-           out.print("Error	al	consultar:	"	+	e);
+           out.print("Error al consultar:	"	+	e);
         }
     %>
     

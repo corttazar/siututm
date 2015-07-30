@@ -35,15 +35,18 @@
              //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
             String usu = "";
             String tipo = "";
+            String id = "";
             HttpSession sesionX = request.getSession();
             if(sesionX.getAttribute("perfil")== null){
              %>
-             <jsp:forward page="index.html">
-                 <jsp:param name="error" value="Es Obligatorio Identificarse"/>
-             </jsp:forward>
+             <script>
+            alert('Necesita estar registrado');
+            window.location = 'index.html';
+        </script>
         <% }else{
                 usu = (String)sesionX.getAttribute("usuario");
                 tipo = (String)sesionX.getAttribute("perfil");
+                id = (String)sesionX.getAttribute("id");
                 out.print("<center> Bienvenido:<font color='#F0C'>"+usu+"</font > Perfil:<font color ='#F0C'>"+tipo+"</font><a href='salir.jsp'>|---Salir---|</a ></center>");
             //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
@@ -62,21 +65,21 @@
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
                     <img class="avatar headerAvatar pull-left" src="images/avatar-1.png" alt="John Smith">
                     <div class="userTop pull-left">
-                        <span class="headerUserName">Antonio Cortazar</span> <span class="fa fa-angle-down"></span>
+                        <span class="headerUserName"><%out.print(usu);%></span> <span class="fa fa-angle-down"></span>
                     </div>
                     <div class="clearfix"></div>
                 </a>
                 <div class="dropdown-menu pull-right userMenu" role="menu">
                     <div class="mobAvatar">
                         <img class="avatar mobAvatarImg" src="images/avatar-1.png" alt="John Smith">
-                        <div class="mobAvatarName">Antonio Cortazar</div>
+                        <div class="mobAvatarName"><%out.print(usu);%></div>
                     </div>
                     <ul>
                         <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
-                        <li><a href="profile.html"><span class="icon-user"></span>Perfil</a></li>
+                        <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
                         <li><a href="#"><span class="icon-bell"></span>Notificaciones <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="icon-power"></span>Salir</a></li>
+                        <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>
                 </div>
             </div>
