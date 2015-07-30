@@ -199,4 +199,24 @@ public class conectar {
 //        }
 //        return false;
 //    }
+    
+     public ResultSet usr(String A, String B) {
+        ResultSet rs = null;
+        try {
+            String sql = "select usuario, contraseña, tipos.perfil from login \n"
+                    + "inner join personas on login.idpersona = personas.idpersona \n"
+                    + "inner join tipos on personas.idtipo=tipos.idtipo where usuario= '" + A + "' and contraseña= '" + B + "'";
+
+            if (conectar()) {
+                Statement stt = conexion.createStatement();
+                rs = stt.executeQuery(sql);
+            }
+
+            return rs;
+        
+    }catch(Exception e) {
+            System.out.println("Error al consultar" + e);
+    }
+        return rs;
+    }
 }
