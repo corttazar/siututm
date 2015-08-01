@@ -28,7 +28,7 @@
                 String usu = mrc.getString(1);
               out.print	("Bienvenido " +usu);
 
-                if (perfil.equals("Profesor de Asignatura")) {
+                if (perfil.equals("profesor tiempo completo")) {
                     HttpSession sesionX = request.getSession();
                     sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
@@ -38,7 +38,7 @@
                     
                 } else if (perfil.equals("OPERADOR")) {
                     HttpSession sesionX = request.getSession();
-                    sesionX.setAttribute("Usuario", usuario);
+                    sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
                     sesionX.setAttribute("id", mrc.getString(1));
                     response.sendRedirect("menu.jsp");

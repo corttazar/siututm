@@ -20,7 +20,7 @@ public class conectar {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
             String BD = "jdbc:oracle:thin:@localhost:1521:XE";
-            conexion = DriverManager.getConnection(BD, "cargahorariadb", "root");
+            conexion = DriverManager.getConnection(BD, "controlhorario", "root");
             if (conexion != null) {
                 System.out.println("Conexion exitosa a esquema XE");
                 return true;

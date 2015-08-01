@@ -51,7 +51,26 @@
                     }   
         </script>
    <body class="notransition" oncontextmenu="return false">
-
+   <%
+             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
+            String usu = "";
+            String tipo = "";
+            String id = "";
+            HttpSession sesionX = request.getSession();
+            if(sesionX.getAttribute("perfil")== null){
+             %>
+             <script>
+            alert('Necesita estar registrado');
+            window.location = 'index.html';
+        </script>
+        <% }else{
+                usu = (String)sesionX.getAttribute("usuario");
+                tipo = (String)sesionX.getAttribute("perfil");
+                id = (String)sesionX.getAttribute("id");
+                out.print("<center> Bienvenido:<font color='#F0C'>"+usu+"</font > Perfil:<font color ='#F0C'>"+tipo+"</font><a href='salir.jsp'>|---Salir---|</a ></center>");
+            //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+            }
+        %>
         <!-- Encabezado -->
 
         <div id="header">
