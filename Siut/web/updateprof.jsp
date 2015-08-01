@@ -33,13 +33,7 @@
               <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
             <script language="javascript">
-                $(document).ready(function () {
-
-                    mostrarLista();
-
-
-                });
-                ///////////////////////////////////
+               
                 function modificardatos()
                         {
                             
@@ -166,12 +160,12 @@
 
         <div id="wrapper">
             <%
-                String id = request.getParameter("id");
+                String idd = request.getParameter("idd");
             %>
 
             <%
                 try {
-                    ResultSet rs = bdcon.consulpersonas("personas", "idpersona", id);
+                    ResultSet rs = bdcon.consulpersonas("personas", "idpersona", idd);
 
                     if (!rs.next()) {
                         out.print("No se encontraron usuarios registrados");

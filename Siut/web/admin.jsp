@@ -77,7 +77,7 @@
                     <ul>
                         <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
                         <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
-                        <li><a href="#"><span class="icon-bell"></span>Notificaciones <span class="badge pull-right bg-red">5</span></a></li>
+                        <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
                         <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>

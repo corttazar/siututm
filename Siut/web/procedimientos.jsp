@@ -199,7 +199,7 @@
                         + "                        <div class='btn-group'>"
                         + "                            <a class='btn btn-xs btn-round btn-o btn-green dropdown-toggle' data-toggle='dropdown'><span class='fa fa-pencil'></span> Acciones</a>"
                         + "                            <ul class='dropdown-menu pull-right' role='menu'>"
-                        + "                                <li><a href='updateprof.jsp?id=" + rs.getObject(1) + "'>Modificar</a></li>"
+                        + "                                <li><a href='updateprof.jsp?idd=" + rs.getObject(1) + "'>Modificar</a></li>"
                         + "                                <li><a value='Eliminar' onclick='eliminarRegistro(" + rs.getObject(1) + ")'>Eliminar</a></li>"
                         + "                            </ul>"
                         + "                        </div>"

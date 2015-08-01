@@ -25,13 +25,7 @@
 
         <jsp:useBean id="bd" class="conexion.altas" scope="page"></jsp:useBean>
         <script language="javascript">
-            $(document).ready(function () {
-
-                mostrarLista();
-
-
-            });
-            ///////////////////////////////////
+            
             function guadardatos()
                     {
                             

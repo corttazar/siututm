@@ -29,13 +29,7 @@
               <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
             <![endif]-->
             <script language="javascript">
-                $(document).ready(function () {
-
-                    mostrarLista();
-
-
-                });
-                ///////////////////////////////////
+               
                 function modificardatos()
                         {
                             
@@ -162,12 +156,12 @@
 
         <div id="wrapper">
             <%
-                String id = request.getParameter("id");
+                String idd = request.getParameter("id");
             %>
 
             <%
                 try {
-                    ResultSet rs = bd.consulmaterias("materias", "idmateria", id);
+                    ResultSet rs = bd.consulmaterias("materias", "idmateria", idd);
 
                     if (!rs.next()) {
                         out.print("No se encontraron materias registrados");
@@ -183,7 +177,7 @@
             <div id="content" class="mob-max">
                 <div class="singleTop whiteBg">
                     <div class="row mb20">
-                        <form name="updatemateria" method="POST" action="updateusuario.jsp?id=<%=rs.getString(1)%>>
+                        <form name="updatemateria" method="POST" action="updateusuario.jsp?id=<%=rs.getString(1)%>">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
@@ -213,8 +207,9 @@
                             <div class="form-group">
                                 <input type="button" class="btn btn-blue btn-lg" onclick="modificardatos()" value="Modificar">
                             </div>
+                                    </form>
                 </div>
-                        </form>
+                        
                     </div>
                 </div>
 
