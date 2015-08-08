@@ -7,9 +7,114 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%
+            //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
+            String usu = "";
+            String tipo = "";
+            String id = "";
+            String nombre = "";
+            String appa = "";
+            String titu = "";
+            String idtipo = "";
+            String foto = "";
+            HttpSession sesionX = request.getSession();
+            if (sesionX.getAttribute("perfil") == null) {
+        %>
+        <script>
+            alert('Necesita estar registrado');
+            window.location = 'index.html';
+        </script>
+        <% } else {
+                usu = (String) sesionX.getAttribute("usuario");
+                tipo = (String) sesionX.getAttribute("perfil");
+                id = (String) sesionX.getAttribute("id");
+                nombre = (String) sesionX.getAttribute("nombre");
+                appa = (String) sesionX.getAttribute("appa");
+                titu = (String) sesionX.getAttribute("titu");
+                idtipo = (String) sesionX.getAttribute("idtipo");
+                foto = (String) sesionX.getAttribute("foto");
+        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+            }
+        %>
+        <script language="JavaScript">
+            switch (<%=idtipo%>) {
+                case 21:
+                    function muestra_oculta(id) {
+                        //se obtiene el id
+
+                        var el = document.getElementById(id);
+                        el.style.display = 'block';
+                    }
+                    window.onload = function () {
+                        muestra_oculta('contenido_a_mostrar');
+                        muestra_oculta('contenido_a_mostrar2');
+                        muestra_oculta('contenido_a_mostrar3');
+                        muestra_oculta('contenido_a_mostrar4');
+                        muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('contenido_a_mostrar6');
+                    }
+                    break;
+                case 1:
+                    function muestra_oculta(id) {
+                        //se obtiene el id
+
+                        var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+                        el.style.display = 'block'; //damos un atributo display:none que oculta el div
+
+                    }
+                    window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                        muestra_oculta('contenido_a_mostrar4');
+                        muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
+                        muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+
+                    }
+                    break;
+                case 2:
+                    function muestra_oculta(id) {
+                        //se obtiene el id
+
+                        var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+                        el.style.display = 'block'; //damos un atributo display:none que oculta el div
+
+                    }
+                    window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                        muestra_oculta('contenido_a_mostrar4');
+                        muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
+                        muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+
+                    }
+                    break;
+                case 3:
+                    function muestra_oculta(id) {
+                        //se obtiene el id
+
+                        var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+                        el.style.display = 'block'; //damos un atributo display:none que oculta el div
+
+                    }
+                    window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+                        muestra_oculta('contenido_a_mostrar4');
+                        muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
+                        muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+
+                    }
+                    break;
+            }
+        </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -22,138 +127,9 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/app-blue.css" rel="stylesheet">     
         <link href="css/fileinput.min.css" rel="stylesheet">
-        <jsp:useBean id="bd" class="conexion.conectar" scope="page"></jsp:useBean>
-        <script language="javascript">
-            $(document).ready(function () {
-
-                mostrarLista();
-
-
-            });
-
-            ///////////////////////////////////7
-            function eliminarRegistro(valor)
-            {
-                $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientos.jsp",
-                            data: "&procedimiento=eliminarRegistro&valor=" + valor,
-                            success: function (respuesta)
-                            {
-                                alert(respuesta);
-                                mostrarLista();
-                            }});
-
-            }
-            
-            function modificarRegistro(valor)
-            {
-                $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientos.jsp",
-                            data: "&procedimiento=modificarRegistro&valor=" + valor,
-                            success: function (respuesta)
-                            {
-
-                                $("#d_resultado_busqueda").html(respuesta);
-
-
-                            }});
-
-            }
-
-
-
-            ///////////////////////////////////
-
-            ///////////////////////////////7
-
-            function buscarPersona()
-            {
-
-                $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientos.jsp",
-                            data: "&procedimiento=buscarPersona&identificacion=" + $("#txt_identificacion_buscar").val(),
-                            success: function (respuesta)
-                            {
-
-                                $("#d_resultado_busqueda").html(respuesta);
-
-
-                            }});
-
-            }
-
-
-            ////////////////////
-            function mostrarLista()
-            {
-
-                $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientos.jsp",
-                            data: "&procedimiento=MostrarLista",
-                            success: function (respuesta)
-                            {
-
-                                $("#d_lista_personas").html(respuesta);
-
-
-                            }});
-
-            }
-            ////////////////////////////////
-            function busquedaAvanzada(valor)
-            {
-
-                $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientos.jsp",
-                            data: "&procedimiento=MostrarListaAvanzada&valor=" + valor,
-                            success: function (respuesta)
-                            {
-
-                                $("#d_lista_personas").html(respuesta);
-
-
-                            }});
-
-
-
-            }
-
-
-
-
-        </script>
     </head>
     <body class="notransition" oncontextmenu="return false">
-   <%
-             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
-            String usu = "";
-            String tipo = "";
-            String id = "";
-            HttpSession sesionX = request.getSession();
-            if(sesionX.getAttribute("perfil")== null){
-             %>
-             <script>
-            alert('Necesita estar registrado');
-            window.location = 'index.html';
-        </script>
-        <% }else{
-                usu = (String)sesionX.getAttribute("usuario");
-                tipo = (String)sesionX.getAttribute("perfil");
-                id = (String)sesionX.getAttribute("id");
-                out.print("<center> Bienvenido:<font color='#F0C'>"+usu+"</font > Perfil:<font color ='#F0C'>"+tipo+"</font><a href='salir.jsp'>|---Salir---|</a ></center>");
-            //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
-            }
-        %>
+
         <!-- Encabezado -->
 
         <div id="header">
@@ -163,30 +139,26 @@
                 </a>
             </div>
             <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
-            <div class="search">
-                <span class="searchIcon icon-magnifier"></span>
-                <input onkeypress='busquedaAvanzada(this.value)' type='text' id='txt_busqueda_avanzada' name='txt_busqueda_avanzada' autofocus="" placeholder="Buscar por nombre..."/>
-            </div>
             <div class="headerUserWraper">
                 <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
-                    <img class="avatar headerAvatar pull-left" src="images/avatar-1.png" alt="John Smith">
-                    <div class="userTop pull-left">
-                        <span class="headerUserName">Antonio Cortazar</span> <span class="fa fa-angle-down"></span>
+                    <img class="avatar headerAvatar pull-left" src="<%=foto%>" alt="<%out.print(nombre + " " + appa);%>">
+                    <div class="userTop pull-left"> 
+                        <span class="headerUserName"><%out.print(titu + ". " + nombre + " " + appa);%></span> <span class="fa fa-angle-down"></span>
                     </div>
                     <div class="clearfix"></div>
                 </a>
                 <div class="dropdown-menu pull-right userMenu" role="menu">
                     <div class="mobAvatar">
-                        <img class="avatar mobAvatarImg" src="images/avatar-1.png" alt="John Smith">
-                        <div class="mobAvatarName">Antonio Cortazar</div>
+                        <img class="avatar mobAvatarImg" src="<%=foto%>" alt="<%out.print(nombre + " " + appa);%>">
+                        <div class="mobAvatarName"><%out.print(titu + ". " + nombre + " " + appa);%></div>
                     </div>
                     <ul>
                         <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
-                        <li><a href="profile.html"><span class="icon-user"></span>Perfil</a></li>
-                        <li><a href="#"><span class="icon-bell"></span>Notificaciones <span class="badge pull-right bg-red">5</span></a></li>
+                        <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
+                        <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="icon-power"></span>Salir</a></li>
+                        <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>
                 </div>
             </div>
@@ -198,53 +170,45 @@
 
         <div id="leftSide">
             <nav class="leftNav scrollable">
-                <div class="search">
-                    <span class="searchIcon icon-magnifier"></span>
-                    <input onkeypress='busquedaAvanzada(this.value)' type='text' id='txt_busqueda_avanzada' name='txt_busqueda_avanzada' placeholder="Buscar por nombre...">
-                    <div class="clearfix"></div>
-                </div>
-
-                 <ul>
-                    <li class="hasSub">
+                <ul>
+                    <li class="hasSub" id="contenido_a_mostrar" style="display:none">
                         <a href="#"><span class="navIcon icon-user"></span><span class="navLabel">Profesores</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li><a href="addprofe.jsp" >Registrar</a></li>
                             <li><a href="buscaprof.jsp">Consultar</a></li>
                         </ul>
                     </li>
-                    <li class="hasSub">
+                    <li class="hasSub" id="contenido_a_mostrar2" style="display:none">
                         <a href="#"><span class="navIcon icon-book-open"></span><span class="navLabel">Materias</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li><a href="addmat.jsp" >Registrar</a></li>
                             <li><a href="buscamat.jsp">Consultar</a></li>
                         </ul>
                     </li>
-                    <li class="hasSub">
+                    <li class="hasSub" id="contenido_a_mostrar3" style="display:none">
                         <a href="#"><span class="navIcon icon-users"></span><span class="navLabel">Grupos</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li><a href="addgrup.jsp" >Registrar</a></li>
                             <li><a href="buscagrup.jsp" >Consultar</a></li>
                         </ul>
                     </li>
-                    <li class="hasSub">
+                    <li class="hasSub" id="contenido_a_mostrar4" style="display:none">
                         <a href="#"><span class="navIcon icon-link"></span><span class="navLabel">Cursos</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
-                            <li><a href="addcurso.jsp" >Registrar</a></li>
-                            <li><a href="buscarcur.jsp" >Consultar</a></li>
+                            <li id="cur_reg" style="display:none"><a href="addcurso.jsp" >Registrar</a></li>
+                            <li id="cur_con" style="display:none"><a href="buscarcur.jsp" >Consultar</a></li>
+                            <li id="cur_hor" style="display:none"><a href="horario.jsp" >Horarios</a></li>
                         </ul>
                     </li>
-                    <li class="hasSub">
+                    <li class="hasSub" id="contenido_a_mostrar5" style="display:none">
                         <a href="#"><span class="navIcon icon-notebook"></span><span class="navLabel">Reportes</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
-                            <li><a href="" data-toggle="modal" data-target="#notificacion">Carga Horaria</a></li>
-                            <li><a href="" data-toggle="modal" data-target="#notificacion">Materias</a></li>
-                            <li><a href="" data-toggle="modal" data-target="#notificacion">Oferta Académica</a></li>
+                            <li id="rep_car" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Carga Horaria</a></li>
+                            <li id="rep_mat" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Materias</a></li>
+                            <li id="rep_ofe" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Oferta Académica</a></li>
                         </ul>
                     </li>
-                    <li class="hasSub">
-                        <a href="cargardatos.jsp"><span class="navIcon icon-link"></span><span class="navLabel">Datos</span><span class="fa fa-angle-left arrowRight"></span></a>
-                    </li>
-                    <li><a href="#" data-toggle="modal" data-target="#contacto"><span class="navIcon icon-bubbles"></span><span class="navLabel">Contacto</span></a>
+                    <li id="contenido_a_mostrar6" style="display:none"><a href="#" data-toggle="modal" data-target="#contacto"><span class="navIcon icon-bubbles"></span><span class="navLabel">Contacto</span></a>
                     </li>
                 </ul>
             </nav>

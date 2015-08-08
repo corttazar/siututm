@@ -20,7 +20,7 @@ public class conectar {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
             String BD = "jdbc:oracle:thin:@localhost:1521:XE";
-            conexion = DriverManager.getConnection(BD, "controlhorario", "root");
+            conexion = DriverManager.getConnection(BD, "cargahorariadb", "root");
             if (conexion != null) {
                 System.out.println("Conexion exitosa a esquema XE");
                 return true;
@@ -74,8 +74,6 @@ public class conectar {
 //        }
 //        return rs;
 //    }
-
-    
 //    public ResultSet Tablas(String A, String B, String C) {
 //        ResultSet rs = null;
 //        try {
@@ -95,8 +93,6 @@ public class conectar {
 //        }
 //        return rs;
 //    }
-    
-
 //    public boolean ModificaPersona(String cnombre, String apat, String amat, String titulo, String idtipo,
 //            String calle, String numero,
 //            String colonia, String cp, String idestado, String idmunicipio, String curp,
@@ -199,26 +195,34 @@ public class conectar {
 //        }
 //        return false;
 //    }
-    
-     public ResultSet usr(String A, String B) {
+    public ResultSet usr(String A, String B) {
         ResultSet rs = null;
         try {
-            String sql = "select l.usuario, l.contraseña, t.tipo, p.idpersona from login l \n"
-                    + "inner join personas p on l.idpersona = p.idpersona  \n"
-                    + "inner join tipos t on p.idtipo=t.idtipo where l.usuario= '" + A + "' and l.contraseña= '" + B + "'";
+            String sql = "select l.usuario, l.contraseña, t.tipo, p.idpersona, \n"
+                    + "p.nombres, p.appaterno, p.titulo, t.idtipo, p.foto, c.idcarrera \n"
+                    + "from login l \n"
+                    + "inner join personas p \n"
+                    + "on l.idpersona = p.idpersona  \n"
+                    + "inner join tipos t \n"
+                    + "on p.idtipo=t.idtipo \n"
+                    + "inner join profesorcarreras pc\n"
+                    + "on pc.idprofesor = p.idpersona\n"
+                    + "inner join carreras c\n"
+                    + "on pc.idcarrera = c.idcarrera\n"
+                    + "where l.usuario= '"+A+"' and l.contraseña= '"+B+"'";
 
-            System.out.println("query de usu: "+sql);
+            System.out.println("query de usu: " + sql);
             if (conectar()) {
                 Statement stt = conexion.createStatement();
                 rs = stt.executeQuery(sql);
             }
 
             return rs;
-        
-    }catch(Exception e) {
+
+        } catch (Exception e) {
             //System.out.println("Error al consultar" + e);
             System.out.println("Usuario y/o Contraseña no válidos");
-    }
+        }
         return rs;
     }
 }

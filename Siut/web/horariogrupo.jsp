@@ -1,14 +1,18 @@
 <%-- 
-    Document   : addmat
-    Created on : 26/06/2015, 12:53:55 AM
+    Document   : horario
+    Created on : 5/08/2015, 02:51:38 AM
     Author     : Tony
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+
+<jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
         <%
+            ResultSet rs = null;
             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
             String usu = "";
             String tipo = "";
@@ -18,6 +22,9 @@
             String titu = "";
             String idtipo = "";
             String foto = "";
+            String turno = "";
+            int horasdisp = 0;
+            String horasprof = "40";
             HttpSession sesionX = request.getSession();
             if (sesionX.getAttribute("perfil") == null) {
         %>
@@ -34,7 +41,8 @@
                 titu = (String) sesionX.getAttribute("titu");
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
-        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+
+                //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
         <script language="JavaScript">
@@ -52,6 +60,10 @@
                         muestra_oculta('contenido_a_mostrar3');
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
                     }
                     break;
@@ -114,31 +126,9 @@
                     break;
             }
         </script>
-        <script language="javascript">
-            $(document).ready(function () {
-
-                mostrarLista();
-
-            });
-            ///////////////////////////////////
-            function guadardatos()
-                    {
-                            
-                        $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientosmat.jsp",
-                            data: "&procedimiento=GuardarInformacion&"+$("#fr_datos").serialize() ,
-                            success: function(respuesta)
-                            {
-
-                               alert(respuesta);
-                               mostrarLista();
-
-                            }});
-                            
-                    }   
-        </script>
+        <%
+            String idgru = request.getParameter("idgru");
+        %>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -239,45 +229,233 @@
         </div>
 
         <!-- Content -->
-
         <div id="wrapper">
-            <div id="content">
-                <div class="rightContainer">
-                    <h4>Nueva Materia</h4>
-                     <form role="form" id="fr_datos">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Materia</label>
-                                    <input type="text" class="form-control" name="materia" autofocus="">
+            <div id="content" class="max">
+                <div class="whiteBg">
+                    <h4 class="text-green">Materias por Grupo</h4>
+                    <%
+                        try {
+                            rs = bdcon.horariogrupo(idgru);
+
+                            if (!rs.next()) {
+                                out.print("No se encontraron materias registradas");
+
+                            } else {
+                    %>
+                    <div class="row icons pb20" id="contenido_grupo">
+                        <div class="col-sm-6">
+                            <div class="tabsWidget">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#properties" role="tab" data-toggle="tab">Asignadas</a></li>
+                                    <li><a href="#users" role="tab" data-toggle="tab">Disponibles</a></li>
+                                </ul>
+                                <div class="tab-content tab-scroll">
+                                    <div class="tab-pane fade in active" id="properties">
+                                        <div class="notificationsWidget">
+                                            <div class="notification">
+                                                <%
+                                                    do {
+                                                %>
+                                                <div class="time red">
+                                                    <div class="timeBody hidden-xs"><%=rs.getString(1)%></div>
+                                                    <div class="timeArrow hidden-xs"><span class="fa fa-caret-right"></span></div>
+                                                    <div class="indicator"><span class="fa fa-circle-o"></span></div>
+                                                    <div class="notifyArrow"><span class="fa fa-caret-left"></span></div>
+                                                </div>
+                                                <div class="notifyContent">
+                                                    <div class="notifyBody">
+                                                        <div class="notifyRound notifyRound-red fa fa-paper-plane-o"></div>
+                                                        <div class="notify pull-left">
+                                                            <div class="name"><%=rs.getString(2)%> <%=rs.getString(3)%> <%=rs.getString(4)%></div>
+                                                            <div class="message"><%=rs.getString(6)%> <%=rs.getString(7)%>:00 - <%=rs.getString(8)%>:00</div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                                <%
+                                                            } while (rs.next());
+                                                        }
+                                                    } catch (Exception e) {
+                                                        out.print("Error al consultar: " + e);
+                                                    }
+                                                %>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <%
+                                        try {
+                                            rs = bdcon.horariogrupodisponible(idgru);
+
+                                            if (!rs.next()) {
+                                                out.print("No se encontraron materias disponibles");
+
+                                            } else {
+                                                horasdisp = (Integer.parseInt(horasprof) - rs.getInt(6));
+                                                turno = rs.getString(7);
+                                    %>
+                                    <div class="tab-pane fade" id="users">
+                                        <div class="tab-pane fade in active" id="properties">
+                                            <div class="notificationsWidget">
+                                                <div class="notification">
+                                                    <%
+                                                        do {
+                                                    %>
+                                                    <div class="time blue">
+                                                        <div class="timeBody hidden-xs"><%=rs.getString(1)%></div>
+                                                        <div class="timeArrow hidden-xs"><span class="fa fa-caret-right"></span></div>
+                                                        <div class="indicator"><span class="fa fa-circle-o"></span></div>
+                                                        <div class="notifyArrow"><span class="fa fa-caret-left"></span></div>
+                                                    </div>
+                                                    <div class="notifyContent"  data-toggle="modal" data-target="#tomarmateria">
+                                                        <div class="notifyBody">
+                                                            <div class="notifyRound notifyRound-blue fa fa-paper-plane-o"></div>
+                                                            <div class="notify pull-left">
+                                                                <div class="name">Sin Profesor</div>
+                                                                <div class="message"><%=rs.getString(2)%> <%=rs.getString(3)%>:00 - <%=rs.getString(4)%>:00</div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                        </div>
+                                                    </div>
+                                                    <%
+                                                                } while (rs.next());
+                                                            }
+                                                        } catch (Exception e) {
+                                                            out.print("Error al consultar: " + e);
+                                                        }
+                                                    %>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Número de Horas</label>
-                                    <input type="text" class="form-control" name="numhrs">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-">
-                                <div class="form-group">
-                                    <label>Horas de Laboratorio</label>
-                                    <input type="text" class="form-control" name="hrslab">
-                                </div>
-                            </div>
-                        </div>
-                       <div class="form-group">
-                            <input type="button" class="btn btn-blue btn-lg" onclick="guadardatos()" value="Guardar">
-                        </div>
-                    </form>
+                        </div>  
+
+                    </div>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
-
-        <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+        <div class="modal fade" id="tomarmateria" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="contactLabel">¿Desea impartir alguna materia?</h4>
+                        <h1 class="modal-title" id="contactLabel">Tiene <%=horasdisp%> horas disponibles</h1>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="contactForm" role="form" method="post" action="procedimientoshorario.jsp">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="btn-group">
+                                    <div class="clearfix"></div>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                        <span class="dropdown-label">Seleccione una materia</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-select">
+                                        <%
+                                            try {
+                                                ResultSet rss = bdcon.horariogrupodisponible(idgru);
+
+                                                if (!rss.next()) {
+                                                    out.print("No se encontraron usuarios registrados");
+
+                                                } else {
+                                                    do {
+
+                                        %>
+                                        <li><input type="radio" name="mate" value="<%=rss.getString(8)%>"><a href="#"><%=rss.getString(1)%></a></li>
+                                        <input name="idhorario" style="display: none;" value="<%=rss.getString(9)%>">
+                                        <input name="idprof" style="display: none;" value="<%=id%>">
+                                        <input name="idgrupo" style="display: none;" value="<%=idgru%>">
+                                        <%
+                                                    } while (rss.next());
+                                                }
+                                            } catch (Exception e) {
+                                                out.print("Error al consultar los profesores: " + e);
+                                            }
+                                        %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="btn-group">
+                                    <div class="clearfix"></div>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                        <span class="dropdown-label">Seleccione un día</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-select">
+                                        <%
+                                            try {
+                                                ResultSet rss = bdcon.consuldias(turno);
+
+                                                if (!rss.next()) {
+                                                    out.print("No se encontraron dias registrados");
+
+                                                } else {
+                                                    do {
+
+                                        %>
+                                        <li><input type="radio" name="dia" value="<%=rss.getString(1)%>"><a href="#"><%=rss.getString(2)%></a></li>
+                                            <%
+                                                        } while (rss.next());
+                                                    }
+                                                } catch (Exception e) {
+                                                    out.print("Error al consultar los dias: " + e);
+                                                }
+                                            %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="btn-group">
+                                    <div class="clearfix"></div>
+                                    <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                        <span class="dropdown-label">Seleccione una hora</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-select">
+                                        <%
+                                            try {
+                                                ResultSet rss = bdcon.consul1hora(turno);
+
+                                                if (!rss.next()) {
+                                                    out.print("No se encontraron horas registradas");
+
+                                                } else {
+                                                    do {
+
+                                        %>
+                                        <li><input type="radio" name="hora" value="<%=rss.getString(1)%>"><a href="#"><%=rss.getString(2)%>:00 - <%=rss.getString(3)%>:00 </a></li>
+                                            <%
+                                                        } while (rss.next());
+                                                    }
+                                                } catch (Exception e) {
+                                                    out.print("Error al consultar las horas: " + e);
+                                                }
+                                            %>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Cancelar</a>
+                                <input type="submit" id="enviarlog" value="Aceptar" name="enviarlog" class="btn btn-lg btn-blue">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="siut.corttazar.com / addprof.html">×</button>
                         <h4 class="modal-title" id="contactLabel">Notificación</h4>
                     </div>
                     <div class="modal-body">
@@ -333,8 +511,9 @@
         <script src="js/bootstrap.js"></script>
         <script src="js/jquery.touchSwipe.min.js"></script>
         <script src="js/jquery.slimscroll.min.js"></script>
-        <script src="js/jquery.visible.js"></script>
+
         <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
+        <script src="js/jquery.visible.js"></script>
         <script src="js/infobox.js"></script>
         <script src="js/clndr.js"></script>
         <script src="js/jquery.tagsinput.min.js"></script>

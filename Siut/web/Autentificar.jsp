@@ -26,28 +26,74 @@
             } else {
                 String perfil = mrc.getString(3);
                 String usu = mrc.getString(1);
-              out.print	("Bienvenido " +usu);
+                String nombre = mrc.getString(5);
+                String appa = mrc.getString(6);
+                String titu = mrc.getString(7);
+                String id =  mrc.getString(4);
+                String idtipo =  mrc.getString(8);
+                String foto = mrc.getString(9);
+                int horasadmin = 40;
+                int horasptc = 40;
+                int horasprof = 30;
+                int horastec = 20;
+                String idcarrera = mrc.getString(10);
 
-                if (perfil.equals("profesor tiempo completo")) {
+                if (perfil.equals("Administrador")) {
                     HttpSession sesionX = request.getSession();
                     sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
-                    sesionX.setAttribute("id", mrc.getString(4));
+                    sesionX.setAttribute("id", id);
+                    sesionX.setAttribute("nombre", nombre);
+                    sesionX.setAttribute("appa", appa);
+                    sesionX.setAttribute("titu", titu);
+                    sesionX.setAttribute("idtipo", idtipo);
+                    sesionX.setAttribute("foto", foto);
+                    sesionX.setAttribute("idcarrera", idcarrera);
+                    sesionX.setAttribute("horasadmin", horasadmin);
                     response.sendRedirect("admin.jsp");
                     
                     
-                } else if (perfil.equals("OPERADOR")) {
+                } else if (perfil.equals("Técnico Académico")) {
                     HttpSession sesionX = request.getSession();
                     sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
-                    sesionX.setAttribute("id", mrc.getString(1));
-                    response.sendRedirect("menu.jsp");
-                } else if (perfil.equals("INVITADO")) {
+                    sesionX.setAttribute("id", id);
+                    sesionX.setAttribute("nombre", nombre);
+                    sesionX.setAttribute("appa", appa);
+                    sesionX.setAttribute("titu", titu);
+                    sesionX.setAttribute("idtipo", idtipo);
+                    sesionX.setAttribute("foto", foto);
+                    sesionX.setAttribute("idcarrera", idcarrera);
+                    sesionX.setAttribute("horastec", horastec);
+                    response.sendRedirect("admin.jsp");
+                    
+                } else if (perfil.equals("Profesor de Tiempo Completo")) {
                     HttpSession sesionX = request.getSession();
-                    sesionX.setAttribute("Usuario", usuario);
+                    sesionX.setAttribute("usuario", usuario);
                     sesionX.setAttribute("perfil", perfil);
-                    sesionX.setAttribute("id", mrc.getString(1));
-                    response.sendRedirect("menu.jsp");
+                    sesionX.setAttribute("id", id);
+                    sesionX.setAttribute("nombre", nombre);
+                    sesionX.setAttribute("appa", appa);
+                    sesionX.setAttribute("titu", titu);
+                    sesionX.setAttribute("idtipo", idtipo);
+                    sesionX.setAttribute("foto", foto);
+                    sesionX.setAttribute("horasptc", horasptc);
+                    sesionX.setAttribute("idcarrera", idcarrera);
+                    response.sendRedirect("admin.jsp");
+                }
+                 else if (perfil.equals("Profesor de Asignatura")) {
+                    HttpSession sesionX = request.getSession();
+                    sesionX.setAttribute("usuario", usuario);
+                    sesionX.setAttribute("perfil", perfil);
+                    sesionX.setAttribute("id", id);
+                    sesionX.setAttribute("nombre", nombre);
+                    sesionX.setAttribute("appa", appa);
+                    sesionX.setAttribute("titu", titu);
+                    sesionX.setAttribute("idtipo", idtipo);
+                    sesionX.setAttribute("foto", foto);
+                    sesionX.setAttribute("horasprof", horasprof);
+                    sesionX.setAttribute("idcarrera", idcarrera);
+                    response.sendRedirect("admin.jsp");
                 }
             }
         } catch (Exception e) {

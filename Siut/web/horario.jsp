@@ -1,14 +1,18 @@
 <%-- 
-    Document   : addmat
-    Created on : 26/06/2015, 12:53:55 AM
+    Document   : horario
+    Created on : 5/08/2015, 02:51:38 AM
     Author     : Tony
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <%
+            ResultSet rs = null;
             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
             String usu = "";
             String tipo = "";
@@ -18,6 +22,8 @@
             String titu = "";
             String idtipo = "";
             String foto = "";
+            String idcarrera ="";
+            
             HttpSession sesionX = request.getSession();
             if (sesionX.getAttribute("perfil") == null) {
         %>
@@ -34,6 +40,7 @@
                 titu = (String) sesionX.getAttribute("titu");
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
+                idcarrera = (String) sesionX.getAttribute("idcarrera");
         //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
@@ -113,31 +120,6 @@
                     }
                     break;
             }
-        </script>
-        <script language="javascript">
-            $(document).ready(function () {
-
-                mostrarLista();
-
-            });
-            ///////////////////////////////////
-            function guadardatos()
-                    {
-                            
-                        $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientosmat.jsp",
-                            data: "&procedimiento=GuardarInformacion&"+$("#fr_datos").serialize() ,
-                            success: function(respuesta)
-                            {
-
-                               alert(respuesta);
-                               mostrarLista();
-
-                            }});
-                            
-                    }   
         </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -239,45 +221,43 @@
         </div>
 
         <!-- Content -->
+        <%
+            try {
+                rs = bdcon.consulgrupodispobible(idcarrera);
+                if (!rs.next()) {
+                    out.print("No se encontraron pizzas registradas");
 
+                } else {
+        %>
         <div id="wrapper">
-            <div id="content">
-                <div class="rightContainer">
-                    <h4>Nueva Materia</h4>
-                     <form role="form" id="fr_datos">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Materia</label>
-                                    <input type="text" class="form-control" name="materia" autofocus="">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Número de Horas</label>
-                                    <input type="text" class="form-control" name="numhrs">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-">
-                                <div class="form-group">
-                                    <label>Horas de Laboratorio</label>
-                                    <input type="text" class="form-control" name="hrslab">
-                                </div>
-                            </div>
-                        </div>
-                       <div class="form-group">
-                            <input type="button" class="btn btn-blue btn-lg" onclick="guadardatos()" value="Guardar">
-                        </div>
-                    </form>
+            <div id="content" class="max">
+                <div class="whiteBg">
+                    <h4 class="text-green">Grupos Disponibles</h4>
+                    <div class="row icons pb20">
+                        <%
+                            do {
+                        %>
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><span class="icon-users"></span><a href="horariogrupo.jsp?idgru=<%=rs.getString(1)%>">
+                                <%=rs.getString(10)%> <%=rs.getString(3)%> <%=rs.getString(2)%></a></div>
+                                <%
+     
+                            } while (rs.next());
+                                        }
+                                    } catch (Exception e) {
+                                        out.print("Error al consultar: " + e);
+                                    }
+                                %>
+                    </div>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
 
         <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="siut.corttazar.com / addprof.html">×</button>
                         <h4 class="modal-title" id="contactLabel">Notificación</h4>
                     </div>
                     <div class="modal-body">
@@ -333,8 +313,9 @@
         <script src="js/bootstrap.js"></script>
         <script src="js/jquery.touchSwipe.min.js"></script>
         <script src="js/jquery.slimscroll.min.js"></script>
-        <script src="js/jquery.visible.js"></script>
+
         <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
+        <script src="js/jquery.visible.js"></script>
         <script src="js/infobox.js"></script>
         <script src="js/clndr.js"></script>
         <script src="js/jquery.tagsinput.min.js"></script>

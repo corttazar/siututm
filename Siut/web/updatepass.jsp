@@ -1,9 +1,15 @@
 <%-- 
-    Document   : addmat
-    Created on : 26/06/2015, 12:53:55 AM
+    Document   : updateprof
+    Created on : 26/06/2015, 01:21:14 AM
     Author     : Tony
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<jsp:useBean id="bd" class="conexion.altas" scope="page"></jsp:useBean>
+<jsp:useBean id="bdc" class="conexion.conectar" scope="page"></jsp:useBean>
+<jsp:useBean id="bdb" class="conexion.bajas" scope="page"></jsp:useBean>
+<jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
+<jsp:useBean id="bdm" class="conexion.modificaciones" scope="page"></jsp:useBean>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,30 +121,30 @@
             }
         </script>
         <script language="javascript">
-            $(document).ready(function () {
+                $(document).ready(function () {
 
-                mostrarLista();
+                    mostrarLista();
 
-            });
-            ///////////////////////////////////
-            function guadardatos()
-                    {
+
+                });
+                ///////////////////////////////////
+                function modificardatos()
+                        {
                             
-                        $.ajax
-                        ({
-                            type: "POST",
-                            url: "procedimientosmat.jsp",
-                            data: "&procedimiento=GuardarInformacion&"+$("#fr_datos").serialize() ,
-                            success: function(respuesta)
-                            {
+                            $.ajax
+                            ({
+                                type: "POST",
+                                url: "procedimientos.jsp",
+                                data: "&procedimiento=Modificarcontrasena&"+$("#fr_datos").serialize() ,
+                                success: function(respuesta)
+                                {
 
-                               alert(respuesta);
-                               mostrarLista();
+                                   alert(respuesta);
 
-                            }});
+                                }});
                             
-                    }   
-        </script>
+                        }   
+            </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -179,7 +185,7 @@
                     </div>
                     <ul>
                         <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
-                        <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
+                        <li><a href='updateprof.jsp?idd=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
                         <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
                         <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
@@ -237,89 +243,43 @@
                 </ul>
             </nav>
         </div>
-
         <!-- Content -->
 
         <div id="wrapper">
-            <div id="content">
-                <div class="rightContainer">
-                    <h4>Nueva Materia</h4>
-                     <form role="form" id="fr_datos">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Materia</label>
-                                    <input type="text" class="form-control" name="materia" autofocus="">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                <div class="form-group">
-                                    <label>Número de Horas</label>
-                                    <input type="text" class="form-control" name="numhrs">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-">
-                                <div class="form-group">
-                                    <label>Horas de Laboratorio</label>
-                                    <input type="text" class="form-control" name="hrslab">
-                                </div>
-                            </div>
-                        </div>
-                       <div class="form-group">
-                            <input type="button" class="btn btn-blue btn-lg" onclick="guadardatos()" value="Guardar">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="contactLabel">Notificación</h4>
-                    </div>
-                    <div class="modal-body">
-                        <b>Módulo en construcción</b>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="contacto" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="contactLabel">Contactar Agente</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form class="contactForm" method="post" action="contacto.php">
+            <div id="content" class="mob-max">
+                <div class="singleTop whiteBg">
+                    <div class="row mb20">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 pb20">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                                    <input id="nombre" type="text" name="nombre" placeholder="Nombre" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                                    <input  id="email" type="email" name="email" placeholder="Correo Electónico" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                                    <input id="asunto" type="text" name="asunto"  placeholder="Asunto" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                                    <textarea id="mensaje" name="mensaje" placeholder="Mensaje" rows="3" class="form-control" required></textarea>
+
+                                <div class="col-xs-6">
+                                    <div class="profile-card">
+                                        <div class="pc-avatar"><img src="<%=foto%>" alt="avatar"></div>
+                                        <div class="pc-name"><%=titu%> <%=nombre%> <%=appa%></div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Cerrar</a>
-                                <input class="btn btn-round btn-green" id="submit" type="submit" name="submit" value="Enviar mensaje">
-
+                            <div class="clearfix"></div>
+                        </div>
+                        <form role="form" id="fr_datos">
+                            <h4>Modificar la contraseña</h4>
+                            <div class="row">
+                                
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label>Nueva Contrasñe</label>
+                                        <input type="text" class="form-control" name="contrasena" value="" autofocus>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group">
+                                <input type="button" class="btn btn-blue btn-lg" onclick="modificardatos()" value="Modificar">
                             </div>
                         </form>
                     </div>
-
                 </div>
+
             </div>
         </div>
 

@@ -6,7 +6,35 @@
 <jsp:useBean id="bdb" class="conexion.bajas" scope="page"></jsp:useBean>
 <jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
 <jsp:useBean id="bdm" class="conexion.modificaciones" scope="page"></jsp:useBean>
-
+<%
+            //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
+            String usu = "";
+            String tipo = "";
+            String idd = "";
+            String nombree = "";
+            String appa = "";
+            String titu = "";
+            String idtipo = "";
+            String fotoo = "";
+            HttpSession sesionX = request.getSession();
+            if (sesionX.getAttribute("perfil") == null) {
+        %>
+        <script>
+            alert('Necesita estar registrado');
+            window.location = 'index.html';
+        </script>
+        <% } else {
+                usu = (String) sesionX.getAttribute("usuario");
+                tipo = (String) sesionX.getAttribute("perfil");
+                idd = (String) sesionX.getAttribute("id");
+                nombree = (String) sesionX.getAttribute("nombre");
+                appa = (String) sesionX.getAttribute("appa");
+                titu = (String) sesionX.getAttribute("titu");
+                idtipo = (String) sesionX.getAttribute("idtipo");
+                fotoo = (String) sesionX.getAttribute("foto");
+        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+            }
+        %>
 
 <%
 
@@ -52,7 +80,7 @@
         try {
             if (bd.GuardarPersona(nombre, appaterno, apmaterno, titulo,
                     tipoprof,
-                    calle, numero, colonia, cp, edo, mpio, curp, foto,
+                    calle, numero, colonia, cp, edo, mpio, curp, "images/"+foto,
                     telefono, celular, correo, fechanac)) {
                 out.print("Datos Almacenados Satisfactoriamente");
             } else {
@@ -88,6 +116,20 @@
                     tipoprof,
                     calle, numero, colonia, cp, edo, mpio, curp,
                     telefono, celular, correo, fechanac, id)) {
+                out.print("Datos Modificados");
+            } else {
+                out.print("Error al Modificar");
+            }
+        } catch (Exception ex) {
+            out.print(ex);
+        }
+
+    }
+    
+    if (procedmiento.equalsIgnoreCase("Modificarconttrasena")) {
+        String contrasena = request.getParameter("contrasena");
+        try {
+            if (bdm.Modificacontrasena(idd, contrasena)) {
                 out.print("Datos Modificados");
             } else {
                 out.print("Error al Modificar");
