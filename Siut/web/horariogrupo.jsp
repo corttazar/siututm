@@ -48,13 +48,13 @@
                     horasprof = "40";
                     break;
                 case 1:
-                    horasprof = "40";
+                    horasprof = "20";
                     break;
                 case 2:
-                    horasprof = "30";
+                    horasprof = "40";
                     break;
                 case 3:
-                    horasprof = "20";
+                    horasprof = "14";
                     break;
             }
 
