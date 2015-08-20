@@ -7,14 +7,19 @@ package conexion;
 
 import java.sql.CallableStatement;
 import conexion.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
  * @author Tony
  */
 public class altas {
+
     conectar con = new conectar();
+
     //GUARDAR PERSONA CON ORACLE
+
     public boolean GuardarPersona(String cnombre, String apat, String amat, String titulo, String idtipo,
             String calle, String numero,
             String colonia, String cp, String idestado, String idmunicipio, String curp, String foto,
@@ -49,7 +54,7 @@ public class altas {
             return false;
         }
     }
-    
+
     public boolean GuardarMateria(String mat, String hrs, String hrslab) {
         try {
             if (con.conectar()) {
@@ -67,15 +72,32 @@ public class altas {
             return false;
         }
     }
-    
+
+    public boolean Guardarnotificacion(String idper, String notifi) {
+        try {
+            if (con.conectar()) {
+                CallableStatement cs = null;
+                cs = con.conexion.prepareCall("BEGIN INSERTNOTIFICACION(?,?); END;");
+                cs.setString(1, idper);
+                cs.setString(2, notifi);
+                cs.execute();
+                con.conexion.close();
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al guardar Materia: " + e);
+            return false;
+        }
+    }
+
     public boolean GuardarGrupo(String grado, String grupo, String idCarrera, String turno) {
         try {
             if (con.conectar()) {
                 CallableStatement cs = null;
                 cs = con.conexion.prepareCall("BEGIN INSERTGRUPO(?,?,?,?); END;");
-                cs.setString(1, grado);
-                cs.setString(2, grupo);
-                cs.setString(3, idCarrera);
+                cs.setString(2, grado);
+                cs.setString(1, grupo);
+                cs.setString(4, idCarrera);
                 cs.setString(3, turno);
                 cs.execute();
                 con.conexion.close();
@@ -86,22 +108,47 @@ public class altas {
             return false;
         }
     }
-    
+
+    public boolean consuexistecurso(String idmat, String idgrup, String idperio) {
+        ResultSet rs = null;
+        String sql = "select * from cursos where "
+                + " idmateria = "+idmat+" and idperiodo = "+idperio+"  and idgrupo = "+idgrup+"";
+        try {
+            if (con.conectar()) {
+                Statement stt = con.conexion.createStatement();
+                rs = stt.executeQuery(sql);
+                if (!rs.next()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al consultar curso existente: " + e);
+        }
+        return false;
+    }
+
     public boolean GuardarCurso(String idprof, String idmat, String idgrup, String idlab, String idperio) {
         try {
             if (con.conectar()) {
                 CallableStatement cs = null;
-                System.out.println("prof:" +idprof+" materia: "+idmat+" grupo: "+idgrup+" lab: "+idlab+" idperiodo: "+idperio);
-                cs = con.conexion.prepareCall("BEGIN INSERTCURSO(?,?,?,?,?); END;");
-                cs.setString(1, idprof);
-                cs.setString(2, idmat);
-                cs.setString(3, idgrup);
-                cs.setString(4, idlab);
-                cs.setString(5, idperio);
-                cs.execute();
-                con.conexion.close();
+                if (!consuexistecurso(idmat, idgrup, idperio)) {
+                    cs = con.conexion.prepareCall("BEGIN INSERTCURSO(?,?,?,?,?); END;");
+                    cs.setString(1, idprof);
+                    cs.setString(2, idmat);
+                    cs.setString(3, idgrup);
+                    cs.setString(4, idlab);
+                    cs.setString(5, idperio);
+                    cs.execute();
+                    con.conexion.close();
+                    return true;
+                } else {
+                   
+                }
             }
-            return true;
+             return false;
         } catch (Exception e) {
             System.out.println("Error al guardar cursooo: " + e);
             return false;

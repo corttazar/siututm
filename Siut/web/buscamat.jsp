@@ -139,6 +139,10 @@
                 </a>
             </div>
             <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
+            <div class="search">
+                <span class="searchIcon icon-magnifier"></span>
+                <input onkeypress='busquedaAvanzada(this.value)' type='text' id='txt_busqueda_avanzada' name='txt_busqueda_avanzada' autofocus="" placeholder="Buscar por nombre..."/>
+            </div>
             <div class="headerUserWraper">
                 <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">

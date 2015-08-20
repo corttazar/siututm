@@ -269,7 +269,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label>Título</label>
-                                    <input type="text" class="form-control" name="titulo">
+                                    <input type="text" class="form-control" name="titulo" placeholder="Ej. Lic.">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -307,7 +307,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="C. P." name="cp">
+                                    <input type="text" class="form-control" placeholder="C. P." name="cp" maxlength="5">
                                 </div>
                             </div>
 
@@ -347,7 +347,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                                 <div class="form-group">
                                     <label>CURP</label>
-                                    <input type="text" class="form-control" name="curp">
+                                    <input type="text" class="form-control" name="curp" maxlength="15">
                                 </div>
                             </div>
                             
@@ -364,12 +364,12 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Teléfono" name="telefono">
+                                    <input type="tel" class="form-control" placeholder="Teléfono" name="telefono" maxlength="10">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Celular" name="celular">
+                                    <input type="tel" class="form-control" placeholder="Celular" name="celular" maxlength="10">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

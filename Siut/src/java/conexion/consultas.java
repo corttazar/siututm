@@ -266,7 +266,7 @@ public class consultas {
                     + "on c.idmateria = m.idmateria\n"
                     + "inner join grupos g\n"
                     + "on g.idgrupo = c.idgrupo\n"
-                    + "where c.idgrupo = "+idgrupo+" and c.idpersona is null";
+                    + "where c.idgrupo = " + idgrupo + " and c.idpersona is null";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();
@@ -279,7 +279,7 @@ public class consultas {
         }
         return rs;
     }
-    
+
     public ResultSet consuldias(String turno) {
         ResultSet rs = null;
         try {
@@ -307,20 +307,20 @@ public class consultas {
         }
         return rs;
     }
-    
+
     public ResultSet consul1hora(String turno) {
         ResultSet rs = null;
         try {
             String sql = null;
             switch (turno) {
                 case "Matutino":
-                    sql = "select * from horas where (idhora >= 1 and idhora <=8) or (idhora >=14 and idhora <=20) order by horainicio";
+                    sql = "select * from horas where (idhora >= 1 and idhora <=8) order by horainicio";
                     break;
                 case "Vespertino":
-                    sql = "select * from horas where (idhora >= 6 and idhora <=13) or (idhora >=19 and idhora <=25) order by horainicio";
+                    sql = "select * from horas where (idhora >= 6 and idhora <=13) order by horainicio";
                     break;
                 case "Mixto":
-                    sql = "select * from horas where order by idhora";
+                    sql = "select * from horas where (idhora >= 1 and idhora <=13) order by horainicio";
                     break;
             }
             if (con.conectar()) {
@@ -335,5 +335,22 @@ public class consultas {
         }
         return rs;
     }
-    
+
+    public ResultSet consulturno() {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM (select * from INDICEPROFESOR \n"
+                    + "where tomocarga = 0\n"
+                    + "order by calif desc)\n"
+                    + "WHERE rownum <= 1";
+            if (con.conectar()) {
+                System.out.println("Query: " + sql);
+                Statement stt = con.conexion.createStatement();
+                rs = stt.executeQuery(sql);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al consultar: " + e);
+        }
+        return rs;
+    }
 }

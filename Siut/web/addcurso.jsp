@@ -6,6 +6,7 @@
 
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -247,39 +248,8 @@
                         <h4>Nuevo Curso</h4>
                         <form role="form" id="fr_datos">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                    <div class="btn-group">
-                                        <label>Profesores</label>
-                                        <div class="clearfix"></div>
-                                        <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                            <span class="dropdown-label">Seleccione un profesor</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-select">
-                                        <%
-                                            try {
-                                                ResultSet rs = bdcon.consulpersonas("personas", "nombres", "%");
-
-                                                if (!rs.next()) {
-                                                    out.print("No se encontraron usuarios registrados");
-
-                                                } else {
-
-                                                    do {
-
-                                        %>
-                                        <li><input type="radio" name="prof" value="<%=rs.getString(1)%>"><a href="#"><%=rs.getString(5)%> <%=rs.getString(2)%> <%=rs.getString(3)%> <%=rs.getString(4)%></a></li>
-                                            <%
-                                                        } while (rs.next());
-                                                    }
-                                                } catch (Exception e) {
-                                                    out.print("Error al consultar los profesores: " + e);
-                                                }
-                                            %>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="btn-group">
                                     <label>Materias</label>
                                     <div class="clearfix"></div>
@@ -304,14 +274,14 @@
                                                         } while (rss.next());
                                                     }
                                                 } catch (Exception e) {
-                                                    out.print("Error al consultar los profesores: " + e);
+                                                    out.print("Error al consultar: " + e);
                                                 }
                                             %>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="btn-group">
                                     <label>Grupos</label>
                                     <div class="clearfix"></div>
@@ -336,14 +306,14 @@
                                                         } while (rss.next());
                                                     }
                                                 } catch (Exception e) {
-                                                    out.print("Error al consultar los profesores: " + e);
+                                                    out.print("Error al consultar: " + e);
                                                 }
                                             %>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="btn-group">
                                     <label>Laboratorio</label>
                                     <div class="clearfix"></div>
@@ -368,14 +338,14 @@
                                                         } while (rss.next());
                                                     }
                                                 } catch (Exception e) {
-                                                    out.print("Error al consultar los laboratorios: " + e);
+                                                    out.print("Error al consultar: " + e);
                                                 }
                                             %>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                 <div class="btn-group">
                                     <label>Periodo</label>
                                     <div class="clearfix"></div>
@@ -400,7 +370,7 @@
                                                         } while (rss.next());
                                                     }
                                                 } catch (Exception e) {
-                                                    out.print("Error al consultar los profesores: " + e);
+                                                    out.print("Error al consultar: " + e);
                                                 }
                                             %>
 

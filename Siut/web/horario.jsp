@@ -8,9 +8,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
         <%
             ResultSet rs = null;
             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
@@ -22,8 +22,8 @@
             String titu = "";
             String idtipo = "";
             String foto = "";
-            String idcarrera ="";
-            
+            String idcarrera = "";
+
             HttpSession sesionX = request.getSession();
             if (sesionX.getAttribute("perfil") == null) {
         %>
@@ -41,7 +41,7 @@
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
                 idcarrera = (String) sesionX.getAttribute("idcarrera");
-        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+                //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
         <script language="JavaScript">
@@ -223,11 +223,18 @@
         <!-- Content -->
         <%
             try {
-                rs = bdcon.consulgrupodispobible(idcarrera);
-                if (!rs.next()) {
-                    out.print("No se encontraron pizzas registradas");
+                int turno = 0;
 
-                } else {
+                rs = bdcon.consulturno();
+                while (rs.next()) {
+                    turno = rs.getInt(3);
+                }
+                if (turno == Integer.parseInt(id)) {
+                    rs = bdcon.consulgrupodispobible(idcarrera);
+                    if (!rs.next()) {
+                        out.print("No se encontraron grupos");
+
+                    } else {
         %>
         <div id="wrapper">
             <div id="content" class="max">
@@ -240,13 +247,20 @@
                         <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><span class="icon-users"></span><a href="horariogrupo.jsp?idgru=<%=rs.getString(1)%>">
                                 <%=rs.getString(10)%> <%=rs.getString(3)%> <%=rs.getString(2)%></a></div>
                                 <%
-     
-                            } while (rs.next());
-                                        }
-                                    } catch (Exception e) {
-                                        out.print("Error al consultar: " + e);
+                                        } while (rs.next());
                                     }
+                                } else {
                                 %>
+                        <script>
+                            alert('No es aún su turno para tomar carga horaria.');
+                            window.location = 'admin.jsp';
+                        </script>
+                        <%
+                                }
+                            } catch (Exception e) {
+                                out.print("Error al consultar: " + e);
+                            }
+                        %>
                     </div>
                 </div>
             </div>

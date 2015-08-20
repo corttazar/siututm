@@ -38,7 +38,9 @@
         try {
             if (bd.GuardarMateria(mat, numhrs, hrslab)) {
                 out.print("Datos Almacenados Satisfactoriamente");
+               
             } else {
+               
                 out.print("Error al Almacenar");
             }
         } catch (Exception ex) {

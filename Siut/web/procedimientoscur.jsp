@@ -30,7 +30,7 @@
             if (bd.GuardarCurso(prof, mate, grupo, labora, periodo)) {
                 out.print("Datos Almacenados Satisfactoriamente");
             } else {
-                out.print("Error al Almacenar");
+                out.print("Error al Almacenar, Ya existe el curso");
             }
         } catch (Exception ex) {
             out.print(ex);

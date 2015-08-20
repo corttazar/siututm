@@ -24,7 +24,9 @@
             String foto = "";
             String turno = "";
             int horasdisp = 0;
-            String horasprof = "40";
+            String horasprof = "0";
+            
+            
             HttpSession sesionX = request.getSession();
             if (sesionX.getAttribute("perfil") == null) {
         %>
@@ -41,6 +43,20 @@
                 titu = (String) sesionX.getAttribute("titu");
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
+                switch (Integer.parseInt(idtipo)) {
+                case 21:
+                    horasprof = "40";
+                    break;
+                case 1:
+                    horasprof = "40";
+                    break;
+                case 2:
+                    horasprof = "30";
+                    break;
+                case 3:
+                    horasprof = "20";
+                    break;
+            }
 
                 //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
@@ -243,7 +259,7 @@
                             } else {
                     %>
                     <div class="row icons pb20" id="contenido_grupo">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="tabsWidget">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#properties" role="tab" data-toggle="tab">Asignadas</a></li>
@@ -293,6 +309,9 @@
 
                                             } else {
                                                 horasdisp = (Integer.parseInt(horasprof) - rs.getInt(6));
+                                                if(Integer.parseInt(idtipo) == 1){
+                                                    
+                                                }
                                                 turno = rs.getString(7);
                                     %>
                                     <div class="tab-pane fade" id="users">
@@ -363,7 +382,7 @@
                                                 ResultSet rss = bdcon.horariogrupodisponible(idgru);
 
                                                 if (!rss.next()) {
-                                                    out.print("No se encontraron usuarios registrados");
+                                                    out.print("No se encontraron grupos disponibles");
 
                                                 } else {
                                                     do {
@@ -377,7 +396,7 @@
                                                     } while (rss.next());
                                                 }
                                             } catch (Exception e) {
-                                                out.print("Error al consultar los profesores: " + e);
+                                                out.print("Error al consultar: " + e);
                                             }
                                         %>
                                     </ul>
@@ -511,7 +530,6 @@
         <script src="js/bootstrap.js"></script>
         <script src="js/jquery.touchSwipe.min.js"></script>
         <script src="js/jquery.slimscroll.min.js"></script>
-
         <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
         <script src="js/jquery.visible.js"></script>
         <script src="js/infobox.js"></script>

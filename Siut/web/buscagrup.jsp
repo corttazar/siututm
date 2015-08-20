@@ -114,13 +114,9 @@
                     }
                     break;
             }
-        </script>
-        <script language="javascript">
+        
             $(document).ready(function () {
-
                 mostrarLista();
-
-
             });
 
             ///////////////////////////////////7
@@ -148,19 +144,10 @@
                             data: "&procedimiento=modificarRegistro&valor=" + valor,
                             success: function (respuesta)
                             {
-
                                 $("#d_resultado_busqueda").html(respuesta);
-
-
                             }});
 
             }
-
-
-
-            ///////////////////////////////////
-
-           
             ////////////////////
             function mostrarLista()
             {
@@ -190,19 +177,9 @@
                             data: "&procedimiento=MostrarListaAvanzada&valor=" + valor,
                             success: function (respuesta)
                             {
-
                                 $("#d_lista_grupos").html(respuesta);
-
-
                             }});
-
-
-
             }
-
-
-
-
         </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -228,6 +205,7 @@
                 </a>
             </div>
             <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
+
             <div class="headerUserWraper">
                 <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">
@@ -365,6 +343,7 @@
         </div>
 
 
+        
         <script src="js/json2.js"></script>
         <script src="js/jquery-2.1.1.min.js"></script>
         <script src="js/underscore.js"></script>

@@ -24,13 +24,13 @@
     window.location = 'horariogrupo.jsp?idgru=<%=idgrupo%>';
 </script>
 <%
+    }
 %>
 <script>
     alert('Dia y hora ocupados');
     window.location = 'horariogrupo.jsp?idgru=<%=idgrupo%>';
 </script>
 <%
-        }
     } catch (Exception ex) {
         out.print(ex);
     }

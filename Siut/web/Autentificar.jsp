@@ -22,7 +22,12 @@
         try {
             ResultSet mrc = base.usr(usuario, clave);
             if (!mrc.next()) {
-                out.print("Datos incorrectos!!");
+                %>
+        <script>
+            alert('Datos incorrectos');
+            window.location = 'index.html';
+        </script>
+        <%      
             } else {
                 String perfil = mrc.getString(3);
                 String usu = mrc.getString(1);
@@ -38,6 +43,7 @@
                 int horastec = 20;
                 String idcarrera = mrc.getString(10);
 
+                
                 if (perfil.equals("Administrador")) {
                     HttpSession sesionX = request.getSession();
                     sesionX.setAttribute("usuario", usuario);

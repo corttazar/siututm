@@ -148,25 +148,15 @@
                             data: "&procedimiento=modificarRegistro&valor=" + valor,
                             success: function (respuesta)
                             {
-
                                 $("#d_resultado_busqueda").html(respuesta);
 
-
                             }});
-
             }
-
-
 
             ///////////////////////////////////
 
-          
-
-
-            ////////////////////
             function mostrarLista()
             {
-
                 $.ajax
                         ({
                             type: "POST",
@@ -174,17 +164,12 @@
                             data: "&procedimiento=MostrarLista",
                             success: function (respuesta)
                             {
-
                                 $("#d_lista_cursos").html(respuesta);
-
-
                             }});
-
             }
             ////////////////////////////////
             function busquedaAvanzada(valor)
             {
-
                 $.ajax
                         ({
                             type: "POST",
@@ -192,19 +177,9 @@
                             data: "&procedimiento=MostrarListaAvanzada&valor=" + valor,
                             success: function (respuesta)
                             {
-
                                 $("#d_lista_cursos").html(respuesta);
-
-
                             }});
-
-
-
             }
-
-
-
-
         </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -230,6 +205,10 @@
                 </a>
             </div>
             <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
+            <div class="search">
+                <span class="searchIcon icon-magnifier"></span>
+                <input onkeypress='busquedaAvanzada(this.value)' type='text' id='txt_busqueda_avanzada' name='txt_busqueda_avanzada' autofocus="" placeholder="Buscar por nombre..."/>
+            </div>
             <div class="headerUserWraper">
                 <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">

@@ -210,17 +210,14 @@ public class conectar {
                     + "inner join carreras c\n"
                     + "on pc.idcarrera = c.idcarrera\n"
                     + "where l.usuario= '"+A+"' and l.contraseña= '"+B+"'";
-
             System.out.println("query de usu: " + sql);
             if (conectar()) {
                 Statement stt = conexion.createStatement();
                 rs = stt.executeQuery(sql);
             }
-
             return rs;
 
         } catch (Exception e) {
-            //System.out.println("Error al consultar" + e);
             System.out.println("Usuario y/o Contraseña no válidos");
         }
         return rs;

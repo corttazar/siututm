@@ -115,11 +115,7 @@
             }
         </script>
         <script language="javascript">
-            $(document).ready(function () {
-
-                mostrarLista();
-
-            });
+            
             ///////////////////////////////////
             function guadardatos()
                     {
@@ -131,10 +127,7 @@
                             data: "&procedimiento=GuardarInformacion&"+$("#fr_datos").serialize() ,
                             success: function(respuesta)
                             {
-
                                alert(respuesta);
-                               mostrarLista();
-
                             }});
                             
                     }   
@@ -244,7 +237,7 @@
             <div id="content">
                 <div class="rightContainer">
                     <h4>Nueva Materia</h4>
-                     <form role="form" id="fr_datos">
+                    <form role="form" id="fr_datos" name="form1">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="form-group">
