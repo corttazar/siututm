@@ -48,7 +48,6 @@
                 case 21:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id);
                         el.style.display = 'block';
                     }
@@ -58,8 +57,14 @@
                         muestra_oculta('contenido_a_mostrar3');
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_reg');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
                     }
+
                     break;
                 case 1:
                     function muestra_oculta(id) {
@@ -83,10 +88,8 @@
                 case 2:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -102,10 +105,8 @@
                 case 3:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -115,7 +116,6 @@
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
-
                     }
                     break;
             }
@@ -252,7 +252,7 @@
 
             <%
                 try {
-                    ResultSet rs = bdcon.consulpersonas("personas", "idpersona", idd);
+                    ResultSet rs = bdcon.consulpersonas(id);
 
                     if (!rs.next()) {
                         out.print("No se encontraron usuarios registrados");
@@ -300,14 +300,15 @@
                                         <input type="text" class="form-control" name="appaterno" value="<%=rs.getString(3)%>">
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-">
                                     <div class="form-group">
                                         <label>Apellido Materno</label>
                                         <input type="text" class="form-control" name="apmaterno" value="<%=rs.getString(4)%>">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <label>Título</label>
@@ -319,7 +320,7 @@
                                         <label>Tipo de Profesor</label>
                                         <div class="clearfix"></div>
                                         <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                            <span class="dropdown-label">Seleccione uno</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                            <span class="dropdown-label"><%=rs.getString(20)%></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                                         </a>
                                         <ul class="dropdown-menu dropdown-select">
                                             <li><input type="radio" name="tipoprof" value="1"><a href="#">Profesor de Tiempo Completo</a></li>
@@ -332,7 +333,7 @@
 
                             <h4>Dirección</h4>
                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Calle" name="calle" value="<%=rs.getString(7)%>">
                                     </div>
@@ -342,21 +343,21 @@
                                         <input type="text" class="form-control" placeholder="Número" name="numero" value="<%=rs.getString(8)%>">
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Colonia" name="colonia" value="<%=rs.getString(9)%>">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="C. P." name="cp" value="<%=rs.getString(10)%>">
+                                        <input type="text" class="form-control" placeholder="C. P." name="cp" value="<%=rs.getString(10)%>" maxlength="5">
                                     </div>
                                 </div>
-
+                            
                                 <div class="btn-group">
                                     <div class="clearfix"></div>
                                     <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                        <span class="dropdown-label"><%=rs.getString(13)%></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                        <span class="dropdown-label"><%=rs.getString(22)%></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-select">
                                         <li><input type="radio" name="edo" value="1"><a href="#">Michoacán</a></li>
@@ -369,7 +370,7 @@
                                 <div class="btn-group">
                                     <div class="clearfix"></div>
                                     <a href="#" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
-                                        <span class="dropdown-label">Municipio</span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
+                                        <span class="dropdown-label"><%=rs.getString(24)%></span>&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-select">
                                         <li><input type="radio" name="mpio" value="1"><a href="#">Morelia</a></li>
@@ -383,7 +384,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                                     <div class="form-group">
                                         <label>Fecha de Nacimiento</label>
-                                        <input type="text" class="form-control" id="datepicker" name="fechanac">
+                                        <input type="text" class="form-control" id="datepicker" name="fechanac" value="<%=rs.getString(18)%>">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">

@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script type="text/javascript" src=" https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.pikachoose.js"></script>
         <%
             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
             String usu = "";
@@ -39,11 +41,11 @@
             }
         %>
         <script language="JavaScript">
-            switch (<%=idtipo%>) {
+           
+    switch (<%=idtipo%>) {
                 case 21:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id);
                         el.style.display = 'block';
                     }
@@ -53,8 +55,14 @@
                         muestra_oculta('contenido_a_mostrar3');
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_reg');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
                     }
+
                     break;
                 case 1:
                     function muestra_oculta(id) {
@@ -78,10 +86,8 @@
                 case 2:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -97,10 +103,8 @@
                 case 3:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -110,14 +114,13 @@
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
-
                     }
                     break;
             }
         
             $(document).ready(function () {
                 mostrarLista();
-            });
+            }); 
 
             ///////////////////////////////////7
             function eliminarRegistro(valor)
@@ -193,6 +196,7 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/app-blue.css" rel="stylesheet">     
         <link href="css/fileinput.min.css" rel="stylesheet">
+        
     </head>
     <body class="notransition" oncontextmenu="return false">
 
@@ -206,6 +210,10 @@
             </div>
             <a href="#" class="navHandler"><span class="fa fa-bars"></span></a>
 
+           <div class="search">
+                <span class="searchIcon icon-magnifier"></span>
+                <input onkeypress='busquedaAvanzada(this.value)' type='text' id='txt_busqueda_avanzada' name='txt_busqueda_avanzada' autofocus="" placeholder="Buscar por nombre..."/>
+            </div>
             <div class="headerUserWraper">
                 <a href="#" class="userHandler dropdown-toggle" data-toggle="dropdown"><span class="icon-user"></span><span class="counter">5</span></a>
                 <a href="#" class="headerUser dropdown-toggle" data-toggle="dropdown">

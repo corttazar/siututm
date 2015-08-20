@@ -48,7 +48,6 @@
                 case 21:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id);
                         el.style.display = 'block';
                     }
@@ -58,8 +57,14 @@
                         muestra_oculta('contenido_a_mostrar3');
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_reg');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
                     }
+
                     break;
                 case 1:
                     function muestra_oculta(id) {
@@ -83,10 +88,8 @@
                 case 2:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -102,10 +105,8 @@
                 case 3:
                     function muestra_oculta(id) {
                         //se obtiene el id
-
                         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
                         el.style.display = 'block'; //damos un atributo display:none que oculta el div
-
                     }
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
@@ -115,18 +116,11 @@
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
-
                     }
                     break;
             }
         </script>
         <script language="javascript">
-                $(document).ready(function () {
-
-                    mostrarLista();
-
-
-                });
                 ///////////////////////////////////
                 function modificardatos()
                         {
@@ -135,13 +129,9 @@
                             ({
                                 type: "POST",
                                 url: "procedimientos.jsp",
-                                data: "&procedimiento=Modificarcontrasena&"+$("#fr_datos").serialize() ,
-                                success: function(respuesta)
-                                {
-
-                                   alert(respuesta);
-
-                                }});
+                                data: "&procedimiento=Modificarconttrasena&"+$("#fr_datos").serialize()
+                               
+                                });
                             
                         }   
             </script>

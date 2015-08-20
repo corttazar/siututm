@@ -16,16 +16,17 @@ public class consultas {
 
     conectar con = new conectar();
 
-    public ResultSet consulpersonas(String A, String B, String C) {
+    public ResultSet consulpersonas(String C) {
         ResultSet rs = null;
         try {
-            String sql = "SELECT * FROM " + A + " p \n"
+            String sql = "SELECT * FROM personas p \n"
                     + "inner join tipos t \n"
                     + "on p.idtipo = t.idtipo \n"
-                    + "where p." + B + " \n"
-                    + "like '%" + C + "%'\n"
-                    + "or p.apmaterno  like '%" + C + "%' \n"
-                    + "or p.appaterno  like '%" + C + "%'";
+                    + "inner join estados e\n"
+                    + "on e.idestado = p.idestado\n"
+                    + "inner join municipios m\n"
+                    + "on p.idmunicipio = m.idmunicipio and m.idestado = e.idestado\n"
+                    + "where p.idpersona = " + C + " ";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();
@@ -131,21 +132,13 @@ public class consultas {
     public ResultSet consulcursos() {
         ResultSet rs = null;
         try {
-            String sql = "select p.titulo, p.nombres, p.appaterno, p.apmaterno,\n"
-                    + "m.materia, g.grado, g.grupo, l.edificio, l.laboratorio, l.especialidad,\n"
-                    + "to_char(p.de, 'month','nls_date_language=spanish') as inicio, \n"
-                    + "to_char(p.hasta, 'month','nls_date_language=spanish') as fin , to_char(p.hasta, 'yyyy') as anio\n"
-                    + "from cursos c\n"
-                    + "inner join personas p \n"
-                    + "on c.idpersona = p.idpersona\n"
-                    + "inner join materias m \n"
-                    + "on m.idmateria = c.idmateria\n"
+            String sql = "select m.materia, g.grado, g.grupo, g.turno, c.idcurso\n"
+                    + "from  cursos c\n"
+                    + "inner join materias m\n"
+                    + "on c.idmateria = m.idmateria\n"
                     + "inner join grupos g\n"
                     + "on g.idgrupo = c.idgrupo\n"
-                    + "inner join laboratorios l\n"
-                    + "on l.idlab = c.idlab\n"
-                    + "inner join periodos p\n"
-                    + "on p.idperiodo = c.idperiodo ";
+                    + "where c.idperiodo = 21  and c.idpersona is null ";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();
@@ -181,7 +174,7 @@ public class consultas {
         try {
             String sql = "select * from grupos g\n"
                     + "inner join carreras c\n"
-                    + "on g.idcarrera = c.idcarrera";
+                    + "on g.idcarreradivision = c.idcarrera";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();
@@ -222,21 +215,17 @@ public class consultas {
         ResultSet rs = null;
         try {
             String sql = "select m.materia, p.titulo, p.nombres, p.appaterno, p.apmaterno,\n"
-                    + "d.dia, hr.horainicio, hr.horafin, c.idcurso \n"
-                    + "from horarios h\n"
-                    + "inner join cursos c\n"
-                    + "on h.idcurso = c.idcurso\n"
-                    + "inner join DIASSEMANA d\n"
-                    + "on d.iddia = h.iddia\n"
-                    + "inner join horas hr\n"
-                    + "on hr.idhora = h.idhora\n"
-                    + "inner join materias m\n"
-                    + "on c.idmateria = m.idmateria\n"
-                    + "inner join grupos g\n"
-                    + "on g.idgrupo = c.idgrupo\n"
-                    + "inner join personas p\n"
-                    + "on p.idpersona = c.idpersona\n"
-                    + "where c.idgrupo = " + idgrupo + "";
+                    + "                    c.idcurso \n"
+                    + "                    from horarios h\n"
+                    + "                    inner join cursos c\n"
+                    + "                    on h.idcurso = c.idcurso\n"
+                    + "                    inner join materias m\n"
+                    + "                    on c.idmateria = m.idmateria\n"
+                    + "                    inner join grupos g\n"
+                    + "                    on g.idgrupo = c.idgrupo\n"
+                    + "                    inner join personas p\n"
+                    + "                    on p.idpersona = c.idpersona\n"
+                    + "                    where c.idgrupo = " + idgrupo + "";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();

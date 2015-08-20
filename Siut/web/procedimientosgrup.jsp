@@ -42,7 +42,7 @@
     if (procedmiento.equalsIgnoreCase("MostrarLista")) {
         ResultSet rs = null;
         String tabla = "<div class='row'>"
-                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-6'>"
+                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
                 + "    <div class='table-overflow'>"
                 + "        <table class='table'>"
                 + "            <thead>"
@@ -112,7 +112,7 @@
             rs = bdcon.consulgrupo();
         }
         String tabla = "<div class='row'>"
-                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-6'>"
+                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
                 + "    <div class='table-overflow'>"
                 + "        <table class='table'>"
                 + "            <thead>"
@@ -132,7 +132,7 @@
                         + "            <tbody class='table'>"
                         + "                <tr>"
                         + "                    <td><span class='userName'>" + k + "</span></td>"
-                        + "                    <td>" + rs.getObject(2) + " " + rs.getObject(3) + "</td>"
+                        + "                    <td>" + rs.getObject(3) + " " + rs.getObject(2) + "</td>"
                         + "                    <td><span class='userName'>" + rs.getObject(4) + "</span></td>"
                         + "                    <td><span class='label label-success'>" + rs.getObject(7) + "</span></td>"
                         + "                    <td>"

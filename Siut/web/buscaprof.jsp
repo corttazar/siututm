@@ -35,7 +35,7 @@
                 titu = (String) sesionX.getAttribute("titu");
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
-        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+                //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
         <script language="JavaScript">
@@ -115,6 +115,72 @@
                     break;
             }
         </script>
+        <script language="javascript">
+            $(document).ready(function () {
+
+                mostrarLista();
+
+
+            });
+
+            ///////////////////////////////////7
+            function eliminarRegistro(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientos.jsp",
+                            data: "&procedimiento=eliminarRegistro&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                alert(respuesta);
+                                mostrarLista();
+                            }});
+
+            }
+
+            function modificarRegistro(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientos.jsp",
+                            data: "&procedimiento=modificarRegistro&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                $("#d_resultado_busqueda").html(respuesta);
+
+                            }});
+            }
+
+            ///////////////////////////////////
+
+            function mostrarLista()
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientos.jsp",
+                            data: "&procedimiento=MostrarLista",
+                            success: function (respuesta)
+                            {
+                                $("#d_lista_cursos").html(respuesta);
+                            }});
+            }
+            ////////////////////////////////
+            function busquedaAvanzada(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientos.jsp",
+                            data: "&procedimiento=MostrarListaAvanzada&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                $("#d_lista_personas").html(respuesta);
+                            }});
+            }
+        </script>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -127,6 +193,8 @@
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/app-blue.css" rel="stylesheet">     
         <link href="css/fileinput.min.css" rel="stylesheet">
+        <script type="text/javascript" src=" https://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.pikachoose.js"></script>
     </head>
     <body class="notransition" oncontextmenu="return false">
 

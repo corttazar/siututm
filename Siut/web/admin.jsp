@@ -6,9 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
         <%
             //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
             String usu = "";
@@ -37,7 +37,7 @@
                 foto = (String) sesionX.getAttribute("foto");
                 //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
-        
+
         %>
         <script language="JavaScript">
             switch (<%=idtipo%>) {
@@ -55,9 +55,7 @@
                         muestra_oculta('contenido_a_mostrar5');
                         muestra_oculta('cur_con');
                         muestra_oculta('cur_reg');
-
-                            muestra_oculta('cur_hor');
-            
+                        muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
@@ -157,7 +155,7 @@
                         <div class="mobAvatarName"><%out.print(titu + ". " + nombre + " " + appa);%></div>
                     </div>
                     <ul>
-                        <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
+                        <li><a href='updatepass.jsp'><span class="icon-settings"></span>Ajustes</a></li>
                         <li><a href='updateprof.jsp?idd=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
                         <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
@@ -199,7 +197,7 @@
                         <a href="#"><span class="navIcon icon-link"></span><span class="navLabel">Cursos</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li id="cur_reg" style="display:none"><a href="addcurso.jsp" >Registrar</a></li>
-                            <li id="cur_con" style="display:none"><a href="buscarcur.jsp" >Consultar</a></li>
+                            <li id="cur_con" style="display:none"><a href="buscacur.jsp" >Consultar</a></li>
                             <li id="cur_hor" style="display:none"><a href="horario.jsp" >Horarios</a></li>
                         </ul>
                     </li>
@@ -218,77 +216,84 @@
         </div>
 
         <!-- Content -->
-
-
-        <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="siut.corttazar.com / addprof.html">×</button>
-                        <h4 class="modal-title" id="contactLabel">Notificación</h4>
-                    </div>
-                    <div class="modal-body">
-                        <b>Módulo en construcción</b>
-                    </div>
+        <div id="wrapper">
+            <div id="content">
+                <div class="rightContainer">
+                    <img src="images/logotipoUTM.png" style="display:flex;
+                         margin:0 auto;">
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="contacto" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="contactLabel">Contactar Agente</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <form class="contactForm" method="post" action="contacto.php">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                                    <input id="nombre" type="text" name="nombre" placeholder="Nombre" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
-                                    <input  id="email" type="email" name="email" placeholder="Correo Electónico" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                                    <input id="asunto" type="text" name="asunto"  placeholder="Asunto" class="form-control" required>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
-                                    <textarea id="mensaje" name="mensaje" placeholder="Mensaje" rows="3" class="form-control" required></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Cerrar</a>
-                                <input class="btn btn-round btn-green" id="submit" type="submit" name="submit" value="Enviar mensaje">
-
-                            </div>
-                        </form>
-                    </div>
-
+    </div>
+    <div class="modal fade" id="notificacion" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="siut.corttazar.com / addprof.html">×</button>
+                    <h4 class="modal-title" id="contactLabel">Notificación</h4>
+                </div>
+                <div class="modal-body">
+                    <b>Módulo en construcción</b>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="js/json2.js"></script>
-        <script src="js/jquery-2.1.1.min.js"></script>
-        <script src="js/underscore.js"></script>
-        <script src="js/moment-2.5.1.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jquery-ui-touch-punch.js"></script>
-        <script src="js/jquery.placeholder.js"></script>
-        <script src="js/bootstrap.js"></script>
-        <script src="js/jquery.touchSwipe.min.js"></script>
-        <script src="js/jquery.slimscroll.min.js"></script>
+    <div class="modal fade" id="contacto" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="contactLabel">Contactar Agente</h4>
+                </div>
+                <div class="modal-body">
 
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
-        <script src="js/jquery.visible.js"></script>
-        <script src="js/infobox.js"></script>
-        <script src="js/clndr.js"></script>
-        <script src="js/jquery.tagsinput.min.js"></script>
-        <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/fileinput.min.js"></script>
-        <script src="js/app.js"></script>
-        <script src="js/calendar.js"></script>
-    </body>
+                    <form class="contactForm" method="post" action="contacto.php">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
+                                <input id="nombre" type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 cfItem">
+                                <input  id="email" type="email" name="email" placeholder="Correo Electónico" class="form-control" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
+                                <input id="asunto" type="text" name="asunto"  placeholder="Asunto" class="form-control" required>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cfItem">
+                                <textarea id="mensaje" name="mensaje" placeholder="Mensaje" rows="3" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn btn-round btn-o btn-gray">Cerrar</a>
+                            <input class="btn btn-round btn-green" id="submit" type="submit" name="submit" value="Enviar mensaje">
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/json2.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/moment-2.5.1.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery-ui-touch-punch.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places" type="text/javascript"></script>
+    <script src="js/jquery.visible.js"></script>
+    <script src="js/infobox.js"></script>
+    <script src="js/clndr.js"></script>
+    <script src="js/jquery.tagsinput.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/fileinput.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
 </html>

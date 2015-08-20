@@ -43,7 +43,7 @@
     if (procedmiento.equalsIgnoreCase("MostrarLista")) {
         ResultSet rs = null;
         String tabla = "<div class='row'>"
-                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-6'>"
+                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
                 + "    <div class='table-overflow'>"
                 + "        <table class='table'>"
                 + "            <thead>"
@@ -102,16 +102,15 @@
             rs = bdcon.consulcursos();
         }
         String tabla = "<div class='row'>"
-                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-6'>"
+                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
                 + "    <div class='table-overflow'>"
                 + "        <table class='table'>"
                 + "            <thead>"
                 + "                <tr>"
                 + "                    <th>No.</th>"
-                   + "                    <th>Profesor</th>"
                 + "                    <th>Materia</th>"
                 + "                    <th>Grupo</th>"
-                + "                    <th>Laboratorio</th>"
+                + "                    <th>Turno</th>"
                 + "                    <th>&nbsp;</th>"
                 + "                </tr>";
         try {
@@ -123,10 +122,8 @@
                         + "            <tbody class='table'>"
                         + "                <tr>"
                         + "                    <td><span class='userName'>" + k + "</span></td>"
-                        + "                    <td>" + rs.getObject(1) + " " + rs.getObject(2) + " " + rs.getObject(3) + " "+rs.getObject(4)+"</td>"
-                        + "                    <td>"+ rs.getObject(5) +"</td>"
-                        + "                    <td>"+ rs.getObject(6) +" "+rs.getObject(7)+"</td>"
-                         + "                    <td>"+ rs.getObject(9) +" "+rs.getObject(8)+" "+rs.getObject(10)+"</td>"
+                        + "                    <td>"+ rs.getObject(1) +"</td>"
+                        + "                    <td>"+ rs.getObject(2) +" "+rs.getObject(3)+"</td>"
                         + "                    <td>"
                         + "                        <div class='btn-group'>"
                         + "                            <a class='btn btn-xs btn-round btn-o btn-green dropdown-toggle' data-toggle='dropdown'><span class='fa fa-pencil'></span> Acciones</a>"

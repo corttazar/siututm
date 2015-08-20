@@ -140,7 +140,7 @@ public class modificaciones {
                 cs.setString(2, pass);
                 cs.execute();
                 con.conexion.close();
-                System.out.println("Se realizo la modificacion de materia");
+                System.out.println("Se realizo la modificacion de la contraseña");
             }
             return true;
         } catch (Exception e) {

@@ -7,37 +7,36 @@
 <jsp:useBean id="bdcon" class="conexion.consultas" scope="page"></jsp:useBean>
 <jsp:useBean id="bdm" class="conexion.modificaciones" scope="page"></jsp:useBean>
 <%
-            //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
-            String usu = "";
-            String tipo = "";
-            String idd = "";
-            String nombree = "";
-            String appa = "";
-            String titu = "";
-            String idtipo = "";
-            String fotoo = "";
-            HttpSession sesionX = request.getSession();
-            if (sesionX.getAttribute("perfil") == null) {
-        %>
-        <script>
-            alert('Necesita estar registrado');
-            window.location = 'index.html';
-        </script>
-        <% } else {
-                usu = (String) sesionX.getAttribute("usuario");
-                tipo = (String) sesionX.getAttribute("perfil");
-                idd = (String) sesionX.getAttribute("id");
-                nombree = (String) sesionX.getAttribute("nombre");
-                appa = (String) sesionX.getAttribute("appa");
-                titu = (String) sesionX.getAttribute("titu");
-                idtipo = (String) sesionX.getAttribute("idtipo");
-                fotoo = (String) sesionX.getAttribute("foto");
+    //------------------------VALIDACIÓN	DE	LA	SESION--------------------------------------
+    String usu = "";
+    String tipo = "";
+    String idd = "";
+    String nombree = "";
+    String appa = "";
+    String titu = "";
+    String idtipo = "";
+    String fotoo = "";
+    HttpSession sesionX = request.getSession();
+    if (sesionX.getAttribute("perfil") == null) {
+%>
+<script>
+    alert('Necesita estar registrado');
+    window.location = 'index.html';
+</script>
+<% } else {
+        usu = (String) sesionX.getAttribute("usuario");
+        tipo = (String) sesionX.getAttribute("perfil");
+        idd = (String) sesionX.getAttribute("id");
+        nombree = (String) sesionX.getAttribute("nombre");
+        appa = (String) sesionX.getAttribute("appa");
+        titu = (String) sesionX.getAttribute("titu");
+        idtipo = (String) sesionX.getAttribute("idtipo");
+        fotoo = (String) sesionX.getAttribute("foto");
         //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
-            }
-        %>
+    }
+%>
 
 <%
-
     String procedmiento = request.getParameter("procedimiento");
 
     //////////////////////////////////////////////////////////7
@@ -80,7 +79,7 @@
         try {
             if (bd.GuardarPersona(nombre, appaterno, apmaterno, titulo,
                     tipoprof,
-                    calle, numero, colonia, cp, edo, mpio, curp, "images/"+foto,
+                    calle, numero, colonia, cp, edo, mpio, curp, "images/" + foto,
                     telefono, celular, correo, fechanac)) {
                 out.print("Datos Almacenados Satisfactoriamente");
             } else {
@@ -125,14 +124,20 @@
         }
 
     }
-    
+
     if (procedmiento.equalsIgnoreCase("Modificarconttrasena")) {
         String contrasena = request.getParameter("contrasena");
         try {
             if (bdm.Modificacontrasena(idd, contrasena)) {
-                out.print("Datos Modificados");
+                System.out.println("Datos Modificados");
+%>
+<script>
+    alert('Contraseña Modificada');
+    window.location = 'salir.jsp';
+</script>
+<%
             } else {
-                out.print("Error al Modificar");
+                System.out.println("Error al Modificar");
             }
         } catch (Exception ex) {
             out.print(ex);
@@ -214,7 +219,7 @@
             rs = bdcon.consulpersonas("personas", "nombres", "%");
         }
         String tabla = "<div class='row'>"
-                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-6'>"
+                + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
                 + "    <div class='table-overflow'>"
                 + "        <table class='table'>"
                 + "            <thead>"
