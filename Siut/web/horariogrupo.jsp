@@ -251,7 +251,7 @@
                     <h4 class="text-green">Materias por Grupo</h4>
                     <%
                         try {
-                            rs = bdcon.horariogrupo(idgru);
+                            rs = bdcon.horariogrupoocup(idgru);
 
                             if (!rs.next()) {
                                 out.print("No se encontraron materias registradas");
@@ -273,7 +273,7 @@
                                                     do {
                                                 %>
                                                 <div class="time red">
-                                                    <div class="timeBody hidden-xs"><%=rs.getString(1)%></div>
+                                                    <div class="timeBody hidden-xs"><%=rs.getString(5)%></div>
                                                     <div class="timeArrow hidden-xs"><span class="fa fa-caret-right"></span></div>
                                                     <div class="indicator"><span class="fa fa-circle-o"></span></div>
                                                     <div class="notifyArrow"><span class="fa fa-caret-left"></span></div>
@@ -282,7 +282,7 @@
                                                     <div class="notifyBody">
                                                         <div class="notifyRound notifyRound-red fa fa-paper-plane-o"></div>
                                                         <div class="notify pull-left">
-                                                            <div class="name"><%=rs.getString(2)%> <%=rs.getString(3)%> <%=rs.getString(4)%></div>
+                                                            <div class="name"><%=rs.getString(4)%> <%=rs.getString(1)%> <%=rs.getString(2)%></div>
                                                             <div class="message"><%=rs.getString(6)%> <%=rs.getString(7)%>:00 - <%=rs.getString(8)%>:00</div>
                                                         </div>
                                                         <div class="clearfix"></div>

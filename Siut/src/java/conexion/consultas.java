@@ -239,6 +239,38 @@ public class consultas {
         return rs;
     }
 
+    public ResultSet horariogrupoocup(String idgrupo) {
+        ResultSet rs = null;
+        try {
+            String sql = "select p.nombres, p.appaterno, p.apmaterno, p.titulo, m.materia, d.dia, hr.horainicio, hr.horafin, m.idmateria, \n"
+                    + "(hr.horafin - hr.horainicio) as horastomadas, g.turno, c.idcurso, h.idhorario \n"
+                    + "from horarios h\n"
+                    + "inner join cursos c\n"
+                    + "on h.idcurso = c.idcurso\n"
+                    + "inner join DIASSEMANA d\n"
+                    + "on d.iddia = h.iddia\n"
+                    + "inner join horas hr\n"
+                    + "on hr.idhora = h.idhora\n"
+                    + "inner join materias m\n"
+                    + "on c.idmateria = m.idmateria\n"
+                    + "inner join grupos g\n"
+                    + "on g.idgrupo = c.idgrupo\n"
+                    + "inner join personas p\n"
+                    + "on p.idpersona = c.idpersona\n"
+                    + "where c.idgrupo = "+idgrupo+"";
+            if (con.conectar()) {
+                System.out.println("Query: " + sql);
+                Statement stt = con.conexion.createStatement();
+                rs = stt.executeQuery(sql);
+            }
+            System.out.println("Se realizo la consulta");
+
+        } catch (Exception e) {
+            System.out.println("Error al consultar: " + e);
+        }
+        return rs;
+    }
+
     public ResultSet horariogrupodisponible(String idgrupo) {
         ResultSet rs = null;
         try {
