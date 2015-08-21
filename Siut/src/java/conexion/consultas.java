@@ -16,6 +16,29 @@ public class consultas {
 
     conectar con = new conectar();
 
+    public ResultSet consulpersonass(String A, String B, String C) {
+        ResultSet rs = null;
+        try {
+            String sql = "SELECT * FROM " + A + " p \n"
+                    + "                    inner join tipos t \n"
+                    + "                    on p.idtipo = t.idtipo \n"
+                    + "                    where p." + B + " \n"
+                    + "                    like '%" + C + "%' \n"
+                    + "                    or p.apmaterno  like '%" + C + "%' \n"
+                    + "                    or p.appaterno  like '%" + C + "%'";
+            if (con.conectar()) {
+                System.out.println("Query: " + sql);
+                Statement stt = con.conexion.createStatement();
+                rs = stt.executeQuery(sql);
+            }
+            System.out.println("Se realizo la consulta");
+
+        } catch (Exception e) {
+            System.out.println("Error al consultar: " + e);
+        }
+        return rs;
+    }
+
     public ResultSet consulpersonas(String C) {
         ResultSet rs = null;
         try {

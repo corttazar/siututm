@@ -205,7 +205,7 @@
                         <a href="#"><span class="navIcon icon-notebook"></span><span class="navLabel">Reportes</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li id="rep_car" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Carga Horaria</a></li>
-                            <li id="rep_mat" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Materias</a></li>
+                            <li id="rep_mat" style="display:none"><a href="reporte.jsp" >Materias</a></li>
                             <li id="rep_ofe" style="display:none"><a href="" data-toggle="modal" data-target="#notificacion">Oferta Académica</a></li>
                         </ul>
                     </li>

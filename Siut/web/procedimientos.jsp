@@ -162,7 +162,7 @@
                 + "                </tr>";
 
         try {
-            rs = bdcon.consulpersonas("personas", "nombres", "%");
+            rs = bdcon.consulpersonass("personas", "nombres", "%");
             int k = 0;
             while (rs.next()) {
                 k++;
@@ -216,7 +216,7 @@
         String valor = request.getParameter("valor");
         ResultSet rs = null;
         if (valor.equalsIgnoreCase("") || valor.equalsIgnoreCase(null)) {
-            rs = bdcon.consulpersonas("personas", "nombres", "%");
+            rs = bdcon.consulpersonass("personas", "nombres", "%");
         }
         String tabla = "<div class='row'>"
                 + "<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>"
@@ -231,7 +231,7 @@
                 + "                    <th>&nbsp;</th>"
                 + "                </tr>";
         try {
-            rs = bdcon.consulpersonas("personas", "nombres", valor);
+            rs = bdcon.consulpersonass("personas", "nombres", valor);
             int k = 0;
             while (rs.next()) {
                 k++;
