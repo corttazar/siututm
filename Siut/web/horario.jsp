@@ -229,11 +229,12 @@
                 while (rs.next()) {
                     turno = rs.getInt(3);
                 }
-                if (turno == Integer.parseInt(id)) {
+                boolean s = bdcon.consulturno1(Integer.parseInt(id));
+                
+                if ((turno == Integer.parseInt(id)) || (s == true)) {
                     rs = bdcon.consulgrupodispobible(idcarrera);
                     if (!rs.next()) {
                         out.print("No se encontraron grupos");
-
                     } else {
         %>
         <div id="wrapper">

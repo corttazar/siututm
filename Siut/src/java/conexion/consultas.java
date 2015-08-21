@@ -257,7 +257,7 @@ public class consultas {
                     + "on g.idgrupo = c.idgrupo\n"
                     + "inner join personas p\n"
                     + "on p.idpersona = c.idpersona\n"
-                    + "where c.idgrupo = "+idgrupo+"";
+                    + "where c.idgrupo = " + idgrupo + "";
             if (con.conectar()) {
                 System.out.println("Query: " + sql);
                 Statement stt = con.conexion.createStatement();
@@ -373,5 +373,25 @@ public class consultas {
             System.out.println("Error al consultar: " + e);
         }
         return rs;
+    }
+
+    public boolean consulturno1(int id) {
+        ResultSet rs = null;
+        try {
+            String sql = "select * from INDICEPROFESOR \n"
+                    + "where tomocarga = 1  and idpersona = " + id + "";
+            if (con.conectar()) {
+                Statement stt = con.conexion.createStatement();
+                rs = stt.executeQuery(sql);
+                if (!rs.next()) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al consultar: " + e);
+        }
+        return false;
     }
 }
