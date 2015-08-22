@@ -77,7 +77,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -94,7 +93,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -111,7 +109,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -184,9 +181,8 @@
                         <div class="mobAvatarName"><%out.print(titu + ". " + nombre + " " + appa);%></div>
                     </div>
                     <ul>
-                        <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
+                        <li><a href="updatepass.jsp"><span class="icon-settings"></span>Ajustes</a></li>
                         <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
-                        <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
                         <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>
@@ -226,7 +222,7 @@
                         <a href="#"><span class="navIcon icon-link"></span><span class="navLabel">Cursos</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li id="cur_reg" style="display:none"><a href="addcurso.jsp" >Registrar</a></li>
-                            <li id="cur_con" style="display:none"><a href="buscarcur.jsp" >Consultar</a></li>
+                            <li id="cur_con" style="display:none"><a href="buscacur.jsp" >Consultar</a></li>
                             <li id="cur_hor" style="display:none"><a href="horario.jsp" >Horarios</a></li>
                         </ul>
                     </li>

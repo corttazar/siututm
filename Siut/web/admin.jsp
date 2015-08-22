@@ -73,7 +73,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -90,7 +89,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -107,7 +105,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -157,7 +154,6 @@
                     <ul>
                         <li><a href='updatepass.jsp'><span class="icon-settings"></span>Ajustes</a></li>
                         <li><a href='updateprof.jsp?idd=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
-                        <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
                         <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>

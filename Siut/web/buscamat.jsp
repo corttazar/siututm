@@ -35,7 +35,7 @@
                 titu = (String) sesionX.getAttribute("titu");
                 idtipo = (String) sesionX.getAttribute("idtipo");
                 foto = (String) sesionX.getAttribute("foto");
-        //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
+                //------------------------------TERMINA	VALIDACION	DE	SESION------------------------------
             }
         %>
         <script language="JavaScript">
@@ -53,6 +53,10 @@
                         muestra_oculta('contenido_a_mostrar3');
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
+                        muestra_oculta('cur_con');
+                        muestra_oculta('cur_hor');
+                        muestra_oculta('rep_car');
+                        muestra_oculta('rep_mat');
                         muestra_oculta('contenido_a_mostrar6');
                     }
                     break;
@@ -67,7 +71,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -86,7 +89,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -105,7 +107,6 @@
                     window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
                         muestra_oculta('contenido_a_mostrar4');
                         muestra_oculta('contenido_a_mostrar5');
-                        muestra_oculta('cur_con');
                         muestra_oculta('cur_hor');
                         muestra_oculta('rep_car');
                         muestra_oculta('rep_mat');
@@ -113,6 +114,72 @@
 
                     }
                     break;
+            }
+        </script>
+        <script language="javascript">
+            $(document).ready(function () {
+
+                mostrarLista();
+
+
+            });
+
+            ///////////////////////////////////7
+            function eliminarRegistro(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientosmat.jsp",
+                            data: "&procedimiento=eliminarRegistro&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                alert(respuesta);
+                                mostrarLista();
+                            }});
+
+            }
+            
+            function modificarRegistro(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientosmat.jsp",
+                            data: "&procedimiento=modificarRegistro&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                $("#d_resultado_busqueda").html(respuesta);
+
+                            }});
+            }
+
+            ///////////////////////////////////
+
+            function mostrarLista()
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientosmat.jsp",
+                            data: "&procedimiento=MostrarLista",
+                            success: function (respuesta)
+                            {
+                                $("#d_lista_cursos").html(respuesta);
+                            }});
+            }
+            ////////////////////////////////
+            function busquedaAvanzada(valor)
+            {
+                $.ajax
+                        ({
+                            type: "POST",
+                            url: "procedimientosmat.jsp",
+                            data: "&procedimiento=MostrarListaAvanzada&valor=" + valor,
+                            success: function (respuesta)
+                            {
+                                $("#d_lista_personas").html(respuesta);
+                            }});
             }
         </script>
         <meta charset="utf-8">
@@ -158,9 +225,8 @@
                         <div class="mobAvatarName"><%out.print(titu + ". " + nombre + " " + appa);%></div>
                     </div>
                     <ul>
-                        <li><a href="#"><span class="icon-settings"></span>Ajustes</a></li>
+                        <li><a href="updatepass.jsp"><span class="icon-settings"></span>Ajustes</a></li>
                         <li><a href='updateprof.jsp?id=<%=id%>'><span class="icon-user"></span>Perfil</a></li>
-                        <li><a href="#"><span class="icon-bell"></span>Notificacionesss <span class="badge pull-right bg-red">5</span></a></li>
                         <li class="divider"></li>
                         <li><a href="salir.jsp"><span class="icon-power"></span>Salir</a></li>
                     </ul>
@@ -200,7 +266,7 @@
                         <a href="#"><span class="navIcon icon-link"></span><span class="navLabel">Cursos</span><span class="fa fa-angle-left arrowRight"></span></a>
                         <ul>
                             <li id="cur_reg" style="display:none"><a href="addcurso.jsp" >Registrar</a></li>
-                            <li id="cur_con" style="display:none"><a href="buscarcur.jsp" >Consultar</a></li>
+                            <li id="cur_con" style="display:none"><a href="buscacur.jsp" >Consultar</a></li>
                             <li id="cur_hor" style="display:none"><a href="horario.jsp" >Horarios</a></li>
                         </ul>
                     </li>
